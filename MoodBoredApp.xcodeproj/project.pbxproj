@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18409CEF24DB2983009FB568 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18409CEE24DB2983009FB568 /* LaunchScreenViewController.swift */; };
 		18D3920E24D715DF004EDB56 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D3920D24D715DF004EDB56 /* CollectionViewCell.swift */; };
 		18D4358324D9E4370041FF73 /* MoodViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D4358224D9E4370041FF73 /* MoodViewCell.swift */; };
 		18E0BC1024D70B2F00970EF7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E0BC0F24D70B2F00970EF7 /* AppDelegate.swift */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		18409CEE24DB2983009FB568 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		18D3920D24D715DF004EDB56 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		18D4358224D9E4370041FF73 /* MoodViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodViewCell.swift; sourceTree = "<group>"; };
 		18E0BC0C24D70B2F00970EF7 /* MoodBoredApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoodBoredApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,6 +96,7 @@
 		18D3920F24D715FF004EDB56 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				18409CEE24DB2983009FB568 /* LaunchScreenViewController.swift */,
 				18E0BC1324D70B2F00970EF7 /* HomeViewController.swift */,
 				18E0BC4024D70BEB00970EF7 /* LibraryViewController.swift */,
 				18E0BC4224D70C7400970EF7 /* MainTabBarController.swift */,
@@ -132,7 +135,6 @@
 				18E0BC4424D70CA000970EF7 /* Database */,
 				18E0BC4724D70CD800970EF7 /* Collections */,
 				18E0BC1824D70B3300970EF7 /* Assets.xcassets */,
-				18E0BC1A24D70B3300970EF7 /* LaunchScreen.storyboard */,
 				18E0BC1D24D70B3300970EF7 /* Info.plist */,
 			);
 			path = MoodBoredApp;
@@ -159,6 +161,7 @@
 		18E0BC3F24D70BBD00970EF7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				18E0BC1A24D70B3300970EF7 /* LaunchScreen.storyboard */,
 				18D3920C24D715C7004EDB56 /* Cells */,
 				18D3920F24D715FF004EDB56 /* View Controllers */,
 			);
@@ -325,6 +328,7 @@
 			files = (
 				18E0BC1424D70B2F00970EF7 /* HomeViewController.swift in Sources */,
 				18D4358324D9E4370041FF73 /* MoodViewCell.swift in Sources */,
+				18409CEF24DB2983009FB568 /* LaunchScreenViewController.swift in Sources */,
 				18E0BC1024D70B2F00970EF7 /* AppDelegate.swift in Sources */,
 				18D3920E24D715DF004EDB56 /* CollectionViewCell.swift in Sources */,
 				18E0BC4324D70C7400970EF7 /* MainTabBarController.swift in Sources */,
