@@ -43,6 +43,10 @@ class HomeViewController : UIViewController {
         
         configureView()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = true
+    }
 
     func configureView() {
         view.backgroundColor = .systemBackground
@@ -58,7 +62,7 @@ class HomeViewController : UIViewController {
         view.addSubview(adBannerView)
         
         adBannerView.translatesAutoresizingMaskIntoConstraints = false
-        adBannerView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
+        adBannerView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
         adBannerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
         adBannerView.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -10).isActive = true
         adBannerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -74,7 +78,7 @@ class HomeViewController : UIViewController {
         replyLabel.backgroundColor = .magenta
         
         replyLabel.translatesAutoresizingMaskIntoConstraints = false
-        replyLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
+        replyLabel.topAnchor.constraint(equalTo: self.adBannerView.bottomAnchor, constant: 50).isActive = true
         replyLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
         replyLabel.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -10).isActive = true
         replyLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -93,7 +97,6 @@ class HomeViewController : UIViewController {
         collectionLabel.topAnchor.constraint(equalTo: replyLabel.bottomAnchor, constant: 50).isActive = true
         collectionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
         collectionLabel.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -10).isActive = true
-        collectionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 
         collectionLabel.backgroundColor = .magenta
         collectionLabel.text = "Collections"
@@ -132,7 +135,7 @@ class HomeViewController : UIViewController {
         
         setMoodListViewDelegates()
         
-        moodListView.register(CollectionViewCell.self, forCellWithReuseIdentifier: "cellId")
+        moodListView.register(MoodViewCell.self, forCellWithReuseIdentifier: "cellId")
         
         moodListView.translatesAutoresizingMaskIntoConstraints = false
         moodListView.topAnchor.constraint(equalTo: moodLabel.bottomAnchor, constant: 10).isActive = true
@@ -172,7 +175,14 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! CollectionViewCell
-        return cell
+        
+        if collectionView == self.collectionListView {
+            let collectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! CollectionViewCell
+            return collectionViewCell
+        } else if collectionView == self.moodListView {
+            let moodViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! MoodViewCell
+            return moodViewCell
+        }
+        fatalError()
     } 
 }

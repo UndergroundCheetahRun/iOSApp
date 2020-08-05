@@ -41,9 +41,12 @@ class LibraryViewController : UIViewController {
         setupGridView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = true
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
         self.setupGridView()
         DispatchQueue.main.async {
             self.moodListView.reloadData()
@@ -119,7 +122,6 @@ extension LibraryViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = self.calculateWidth()
         return CGSize(width: width, height: width * 3/2)
-        //return CGSize(width: self.view.frame.width / 3.1, height: (self.view.frame.width / 3.1) * 3/2)
     }
 
     // FUNCTION : calculate width of a cell
