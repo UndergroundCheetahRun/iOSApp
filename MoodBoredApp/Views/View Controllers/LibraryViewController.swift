@@ -83,10 +83,7 @@ class LibraryViewController : UIViewController {
         moodListView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
         moodListView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
         moodListView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
-        moodListView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
-        
-        // Add Collection View Content Offset
-        
+        moodListView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
     }
     
     // COLLECTION VIEW: configure collection view delegates
@@ -97,8 +94,8 @@ class LibraryViewController : UIViewController {
     
     func setupGridView() {
         let flow = moodListView.collectionViewLayout as! UICollectionViewFlowLayout
-        flow.minimumInteritemSpacing = CGFloat(self.cellMarginSize)
-        flow.minimumLineSpacing = CGFloat(self.cellMarginSize) //* 2)
+        flow.minimumInteritemSpacing = 4 //CGFloat(self.cellMarginSize)
+        flow.minimumLineSpacing = 4 // CGFloat(self.cellMarginSize) //* 2)
     }
 }
 
@@ -126,13 +123,13 @@ extension LibraryViewController: UICollectionViewDelegateFlowLayout {
 
     // FUNCTION : calculate width of a cell
     func calculateWidth() -> CGFloat {
-        let estimateWidth = view.frame.width / 3.1
+        let estimateWidth = view.frame.width / 3.5
         let estimatedWidth = CGFloat(estimateWidth)
         let cellCount = floor(CGFloat(self.view.frame.size.width / estimatedWidth))
         
-        let margins = CGFloat(cellMarginSize * 3)
+        let margins = CGFloat(cellMarginSize * 2)
         let width = (self.view.frame.size.width - CGFloat(cellMarginSize) * (cellCount - 1) - margins) / cellCount
-        print(estimateWidth, estimatedWidth, cellCount, margins, width)
+        //print(estimateWidth, estimatedWidth, cellCount, margins, width)
         
         return width
     }
