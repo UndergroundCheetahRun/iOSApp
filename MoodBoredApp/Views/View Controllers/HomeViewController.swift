@@ -22,6 +22,7 @@ class HomeViewController : UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 4
+        layout.sectionInset = UIEdgeInsets.init(top: 0, left: 4, bottom: 0, right: 0)
         let cv = UICollectionView(frame: .infinite, collectionViewLayout: layout)
         return cv
     }()
@@ -30,6 +31,7 @@ class HomeViewController : UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 4
+        layout.sectionInset = UIEdgeInsets.init(top: 0, left: 4, bottom: 0, right: 0)
         let cv = UICollectionView(frame: .infinite, collectionViewLayout: layout)
         return cv
     }()
@@ -48,6 +50,10 @@ class HomeViewController : UIViewController {
         navigationController?.navigationBar.isHidden = true
     }
 
+    override var prefersStatusBarHidden: Bool {
+        return false
+    }
+    
     func configureView() {
         view.backgroundColor = .systemBackground
         configureAddBannerView()
@@ -63,11 +69,9 @@ class HomeViewController : UIViewController {
         
         adBannerView.translatesAutoresizingMaskIntoConstraints = false
         adBannerView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
-        adBannerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
-        adBannerView.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -10).isActive = true
         adBannerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         adBannerView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        adBannerView.widthAnchor.constraint(equalToConstant: 300).isActive = true
+        adBannerView.widthAnchor.constraint(equalToConstant: 320).isActive = true
         
         adBannerView.backgroundColor = .red
     }
@@ -80,7 +84,7 @@ class HomeViewController : UIViewController {
         replyLabel.translatesAutoresizingMaskIntoConstraints = false
         replyLabel.topAnchor.constraint(equalTo: self.adBannerView.bottomAnchor, constant: 50).isActive = true
         replyLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
-        replyLabel.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -10).isActive = true
+        replyLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
         replyLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         replyLabel.setTitle("TEST BUTTON LENGTH TEST BUTTON TEST BUTTON ", for: .normal)
@@ -162,7 +166,12 @@ class HomeViewController : UIViewController {
 extension HomeViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 300 * 9/16, height: 300)
+        if collectionView == self.collectionListView {
+            return CGSize(width: self.collectionListView.frame.height * 4/1, height: self.collectionListView.frame.height)
+        } else if collectionView == self.moodListView {
+            return CGSize(width: 300 * 9/16, height: 300)
+        }
+        fatalError()
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
