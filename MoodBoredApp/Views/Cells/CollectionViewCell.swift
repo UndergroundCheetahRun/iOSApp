@@ -19,7 +19,7 @@ class CollectionViewCell: UICollectionViewCell {
     }
     
     func configureCell() {
-        backgroundColor = .systemBlue
+        backgroundColor = .blue
         configureCellBackground()
     }
     
