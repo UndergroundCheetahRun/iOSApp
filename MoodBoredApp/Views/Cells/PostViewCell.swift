@@ -66,11 +66,13 @@ class PostViewCell: UICollectionViewCell {
         addSubview(textLabel)
         
         textLabel.translatesAutoresizingMaskIntoConstraints = false
-        textLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        textLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 6).isActive = true
+        textLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 6).isActive = true
         textLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         
-        textLabel.text = "Text"
-        textLabel.numberOfLines = 2
+        textLabel.text = "TextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextText"
+        textLabel.textAlignment = .left
+        textLabel.numberOfLines = 6
     }
     
     func configureCollectionIcon() {
