@@ -47,15 +47,22 @@ class HomeViewController : UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.isHidden = true
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false
     }
-
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override var prefersStatusBarHidden: Bool {
         return false
     }
     
     func configureView() {
         view.backgroundColor = .systemBackground
+        
+        configureNavigationBar()
         configureAddBannerView()
         configureReplyLabel()
         configureCollectionsLabel()
@@ -63,6 +70,14 @@ class HomeViewController : UIViewController {
         configureMoodsLabel()
         configureMoodsViews()
     }
+    
+    // NAVIGATION BAR :
+    
+    func configureNavigationBar() {
+        navigationController?.navigationBar.isHidden = true
+    }
+    
+    // AD BANNER :
     
     func configureAddBannerView() {
         view.addSubview(adBannerView)
@@ -75,6 +90,8 @@ class HomeViewController : UIViewController {
         
         adBannerView.backgroundColor = .red
     }
+    
+    // REPLIES :
     
     func configureReplyLabel() {
         view.addSubview(replyLabel)
@@ -92,6 +109,8 @@ class HomeViewController : UIViewController {
         replyLabel.titleLabel?.font = UIFont.systemFont(ofSize: 21, weight: UIFont.Weight.medium)
         replyLabel.titleLabel?.numberOfLines = 4
     }
+    
+    // LABELS :
     
     func configureCollectionsLabel() {
         
@@ -118,6 +137,8 @@ class HomeViewController : UIViewController {
         moodLabel.text = "Moods"
     }
     
+    // COLLECTION VIEWS :
+    
     func configureCollectionsViews() {
         view.addSubview(collectionListView)
         
@@ -129,7 +150,7 @@ class HomeViewController : UIViewController {
         collectionListView.topAnchor.constraint(equalTo: collectionLabel.bottomAnchor, constant: 10).isActive = true
         collectionListView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
         collectionListView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
-        collectionListView.heightAnchor.constraint(equalToConstant: 50 ).isActive = true
+        collectionListView.heightAnchor.constraint(equalToConstant: 45 ).isActive = true
 
         collectionListView.backgroundColor = .yellow
     }
@@ -161,7 +182,19 @@ class HomeViewController : UIViewController {
         moodListView.delegate     = self
         moodListView.dataSource   = self
     }
+    
+    // ACTIONS
+    func callAction() {
+        print("> present view")
+        let view = CreatePostViewController()
+        navigationController?.popViewController(animated: true)
+        view.modalPresentationStyle = .overFullScreen
+        self.present(view, animated: true, completion: nil)
+        //self.navigationController?.pushViewController(view, animated: true)
+    }
 }
+
+// COLLECTION VIEWS : datasource, flow layout
 
 extension HomeViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
@@ -193,5 +226,14 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
             return moodViewCell
         }
         fatalError()
-    } 
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == self.collectionListView {
+            print("> collection pressed")
+        } else if collectionView == self.moodListView {
+            print("> mood pressed")
+            callAction()
+        }
+    }
 }
