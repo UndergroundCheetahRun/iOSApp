@@ -25,7 +25,7 @@ class LibraryViewController : UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.sectionInset = UIEdgeInsets.init(top: 4, left: 4, bottom: 4, right: 4)
-        let cv = UICollectionView(frame: .infinite, collectionViewLayout: layout)
+        let cv = UICollectionView(frame: .init(), collectionViewLayout: layout)
         return cv
     }()
     
@@ -76,14 +76,14 @@ class LibraryViewController : UIViewController {
         setCollectionListViewDelegates()
         
         // Register Cell
-        moodListView.register(MoodViewCell.self, forCellWithReuseIdentifier: "cellId")
+        moodListView.register(MoodViewCell.self, forCellWithReuseIdentifier: "MoodCellId")
         
         // Add Auto Layout Constraints
         moodListView.translatesAutoresizingMaskIntoConstraints = false
         moodListView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
         moodListView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
         moodListView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
-        moodListView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+        moodListView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
     }
     
     // COLLECTION VIEW: configure collection view delegates
@@ -106,7 +106,7 @@ extension LibraryViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! MoodViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MoodCellId", for: indexPath) as! MoodViewCell
         return cell
     }
 }

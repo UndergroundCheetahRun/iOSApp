@@ -10,7 +10,7 @@ import UIKit
 
 class CollectionViewCell: UICollectionViewCell {
     
-    var cellBackground = UIView()
+    var cellBackground = UIButton()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -19,7 +19,7 @@ class CollectionViewCell: UICollectionViewCell {
     }
     
     func configureCell() {
-        backgroundColor = .blue
+        backgroundColor = .clear
         configureCellBackground()
     }
     
@@ -34,6 +34,7 @@ class CollectionViewCell: UICollectionViewCell {
         cellBackground.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).isActive = true
         
         cellBackground.backgroundColor = .systemBlue
+        cellBackground.layer.cornerRadius = self.frame.height / 2
     }
     
     required init?(coder: NSCoder) {
