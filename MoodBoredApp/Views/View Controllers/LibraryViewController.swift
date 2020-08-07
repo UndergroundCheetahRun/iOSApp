@@ -43,6 +43,7 @@ class LibraryViewController : UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = true
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     override func viewDidLayoutSubviews() {
@@ -76,7 +77,7 @@ class LibraryViewController : UIViewController {
         setCollectionListViewDelegates()
         
         // Register Cell
-        moodListView.register(MoodViewCell.self, forCellWithReuseIdentifier: "MoodCellId")
+        moodListView.register(PostViewCell.self, forCellWithReuseIdentifier: "PostCellId")
         
         // Add Auto Layout Constraints
         moodListView.translatesAutoresizingMaskIntoConstraints = false
@@ -97,6 +98,16 @@ class LibraryViewController : UIViewController {
         flow.minimumInteritemSpacing = 4 //CGFloat(self.cellMarginSize)
         flow.minimumLineSpacing = 4 // CGFloat(self.cellMarginSize) //* 2)
     }
+    
+    // ACTIONS
+    func callAction() {
+        print("> present view")
+        let view = PostDetailViewController()
+        navigationController?.popViewController(animated: true)
+        view.modalPresentationStyle = .overFullScreen
+        self.present(view, animated: true, completion: nil)
+        //self.navigationController?.pushViewController(view, animated: true)
+    }
 }
 
 extension LibraryViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -106,8 +117,15 @@ extension LibraryViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MoodCellId", for: indexPath) as! MoodViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PostCellId", for: indexPath) as! PostViewCell
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == self.moodListView {
+            print("> post pressed")
+            callAction()
+        }
     }
 }
 

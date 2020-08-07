@@ -20,6 +20,7 @@ class MainTabBarController: UITabBarController {
     
     let circle  = "circle32"
     
+    // VIEW DID LOAD :
     
     override func viewDidLoad() {
         super.viewDidLoad()
