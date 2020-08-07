@@ -25,7 +25,7 @@ class LibraryViewController : UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.sectionInset = UIEdgeInsets.init(top: 4, left: 4, bottom: 4, right: 4)
-        let cv = UICollectionView(frame: .infinite, collectionViewLayout: layout)
+        let cv = UICollectionView(frame: .init(), collectionViewLayout: layout)
         return cv
     }()
     
@@ -76,7 +76,7 @@ class LibraryViewController : UIViewController {
         setCollectionListViewDelegates()
         
         // Register Cell
-        moodListView.register(MoodViewCell.self, forCellWithReuseIdentifier: "cellId")
+        moodListView.register(MoodViewCell.self, forCellWithReuseIdentifier: "MoodCellId")
         
         // Add Auto Layout Constraints
         moodListView.translatesAutoresizingMaskIntoConstraints = false
@@ -84,9 +84,6 @@ class LibraryViewController : UIViewController {
         moodListView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
         moodListView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
         moodListView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
-        
-        // Add Collection View Content Offset
-        
     }
     
     // COLLECTION VIEW: configure collection view delegates
@@ -97,8 +94,8 @@ class LibraryViewController : UIViewController {
     
     func setupGridView() {
         let flow = moodListView.collectionViewLayout as! UICollectionViewFlowLayout
-        flow.minimumInteritemSpacing = CGFloat(self.cellMarginSize)
-        flow.minimumLineSpacing = CGFloat(self.cellMarginSize) //* 2)
+        flow.minimumInteritemSpacing = 4 //CGFloat(self.cellMarginSize)
+        flow.minimumLineSpacing = 4 // CGFloat(self.cellMarginSize) //* 2)
     }
 }
 
@@ -109,7 +106,7 @@ extension LibraryViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! MoodViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MoodCellId", for: indexPath) as! MoodViewCell
         return cell
     }
 }
@@ -126,13 +123,13 @@ extension LibraryViewController: UICollectionViewDelegateFlowLayout {
 
     // FUNCTION : calculate width of a cell
     func calculateWidth() -> CGFloat {
-        let estimateWidth = view.frame.width / 3.1
+        let estimateWidth = view.frame.width / 3.5
         let estimatedWidth = CGFloat(estimateWidth)
         let cellCount = floor(CGFloat(self.view.frame.size.width / estimatedWidth))
         
-        let margins = CGFloat(cellMarginSize * 3)
+        let margins = CGFloat(cellMarginSize * 2)
         let width = (self.view.frame.size.width - CGFloat(cellMarginSize) * (cellCount - 1) - margins) / cellCount
-        print(estimateWidth, estimatedWidth, cellCount, margins, width)
+        //print(estimateWidth, estimatedWidth, cellCount, margins, width)
         
         return width
     }

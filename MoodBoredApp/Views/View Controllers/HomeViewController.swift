@@ -139,7 +139,7 @@ class HomeViewController : UIViewController {
         
         setMoodListViewDelegates()
         
-        moodListView.register(MoodViewCell.self, forCellWithReuseIdentifier: "cellId")
+        moodListView.register(MoodViewCell.self, forCellWithReuseIdentifier: "MoodCellId")
         
         moodListView.translatesAutoresizingMaskIntoConstraints = false
         moodListView.topAnchor.constraint(equalTo: moodLabel.bottomAnchor, constant: 10).isActive = true
@@ -189,7 +189,7 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
             let collectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! CollectionViewCell
             return collectionViewCell
         } else if collectionView == self.moodListView {
-            let moodViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! MoodViewCell
+            let moodViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MoodCellId", for: indexPath) as! MoodViewCell
             return moodViewCell
         }
         fatalError()
