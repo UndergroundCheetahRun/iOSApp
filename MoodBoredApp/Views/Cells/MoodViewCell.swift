@@ -10,10 +10,12 @@ import UIKit
 
 class MoodViewCell: UICollectionViewCell {
     
-    var imageView  = UIView()
-    var iconView        = UIImageView()
-    var dateLabel       = UILabel()
-    var textLabel       = UILabel()
+    var imageView           = UIView()
+    var button              = UIButton()
+    var iconView            = UIImageView()
+    var dateLabel           = UILabel()
+    var textLabel           = UILabel()
+    var tapToConfirmLabel   = UILabel()
     
     var borderAlpha : CGFloat = 0
     
@@ -30,12 +32,26 @@ class MoodViewCell: UICollectionViewCell {
     
     func configureView() {
         backgroundColor = .clear
-        configureCellBackground()
+        configureImageView()
         configureCollectionIcon()
+        configureTapToConfirmLabel()
         configureMoodLabel()
     }
     
-    func configureCellBackground() {
+    func configureButton() {
+        addSubview(button)
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
+        button.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0).isActive = true
+        button.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
+        button.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).isActive = true
+        
+        button.backgroundColor = .magenta
+        button.layer.cornerRadius = self.frame.height * 1/30
+    }
+    
+    func configureImageView() {
         addSubview(imageView)
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -46,10 +62,6 @@ class MoodViewCell: UICollectionViewCell {
         
         imageView.backgroundColor = .magenta
         imageView.layer.cornerRadius = self.frame.height * 1/30
-    }
-    
-    func configureCellImage() {
-        
     }
     
     func configureMoodLabel() {
@@ -76,6 +88,19 @@ class MoodViewCell: UICollectionViewCell {
         iconView.image = UIImage.init(named: "circle32")
     }
     
+    func configureTapToConfirmLabel() {
+        addSubview(tapToConfirmLabel)
+        
+        tapToConfirmLabel.translatesAutoresizingMaskIntoConstraints = false
+        tapToConfirmLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8).isActive = true
+        tapToConfirmLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        //tapToConfirmLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).isActive = true
+        
+        tapToConfirmLabel.backgroundColor = .clear
+        tapToConfirmLabel.text = "TAP TO CONFIRM"
+        tapToConfirmLabel.alpha = 0
+    }
+    
     // ACTIONS
     
     func showBorderAction() {
@@ -83,11 +108,13 @@ class MoodViewCell: UICollectionViewCell {
         self.borderAlpha = 1
         imageView.layer.borderColor = UIColor.init(red: 1, green: 1, blue: 1, alpha: borderAlpha).cgColor
         imageView.layer.borderWidth = 4
+        tapToConfirmLabel.alpha = borderAlpha
     }
     
     func hideBorderAction() {
         self.borderAlpha = 0
         imageView.layer.borderColor = UIColor.init(red: 1, green: 1, blue: 1, alpha: borderAlpha).cgColor
         imageView.layer.borderWidth = 4
+        tapToConfirmLabel.alpha = borderAlpha
     }
 }
