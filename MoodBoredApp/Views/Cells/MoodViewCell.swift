@@ -10,10 +10,13 @@ import UIKit
 
 class MoodViewCell: UICollectionViewCell {
     
-    var cellBackground  = UIView()
+    var imageView  = UIView()
     var iconView        = UIImageView()
     var dateLabel       = UILabel()
     var textLabel       = UILabel()
+    
+    var borderAlpha : CGFloat = 0
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -33,16 +36,16 @@ class MoodViewCell: UICollectionViewCell {
     }
     
     func configureCellBackground() {
-        addSubview(cellBackground)
+        addSubview(imageView)
         
-        cellBackground.translatesAutoresizingMaskIntoConstraints = false
-        cellBackground.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
-        cellBackground.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0).isActive = true
-        cellBackground.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
-        cellBackground.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).isActive = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
+        imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0).isActive = true
+        imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
+        imageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).isActive = true
         
-        cellBackground.backgroundColor = .magenta
-        cellBackground.layer.cornerRadius = self.frame.height * 1/30
+        imageView.backgroundColor = .magenta
+        imageView.layer.cornerRadius = self.frame.height * 1/30
     }
     
     func configureCellImage() {
@@ -71,5 +74,20 @@ class MoodViewCell: UICollectionViewCell {
         
         iconView.backgroundColor = .clear
         iconView.image = UIImage.init(named: "circle32")
+    }
+    
+    // ACTIONS
+    
+    func showBorderAction() {
+        print("> mood selected")
+        self.borderAlpha = 1
+        imageView.layer.borderColor = UIColor.init(red: 1, green: 1, blue: 1, alpha: borderAlpha).cgColor
+        imageView.layer.borderWidth = 4
+    }
+    
+    func hideBorderAction() {
+        self.borderAlpha = 0
+        imageView.layer.borderColor = UIColor.init(red: 1, green: 1, blue: 1, alpha: borderAlpha).cgColor
+        imageView.layer.borderWidth = 4
     }
 }

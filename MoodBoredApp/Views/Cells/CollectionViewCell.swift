@@ -10,12 +10,14 @@ import UIKit
 
 class CollectionViewCell: UICollectionViewCell {
     
-    var cellBackground  = UIView()
+    var imageView  = UIView()
     var iconView        = UIImageView()
     var dateLabel       = UILabel()
     var textLabel       = UILabel()
     
     var stackView       = UIStackView()
+    
+    var borderAlpha : CGFloat = 0
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -35,16 +37,16 @@ class CollectionViewCell: UICollectionViewCell {
     
     func configureCellBackground() {
         
-        addSubview(cellBackground)
+        addSubview(imageView)
         
-        cellBackground.translatesAutoresizingMaskIntoConstraints = false
-        cellBackground.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
-        cellBackground.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0).isActive = true
-        cellBackground.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
-        cellBackground.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).isActive = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
+        imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0).isActive = true
+        imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
+        imageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).isActive = true
         
-        cellBackground.backgroundColor = .systemBlue
-        cellBackground.layer.cornerRadius = self.frame.height / 2
+        imageView.backgroundColor = .systemBlue
+        imageView.layer.cornerRadius = self.frame.height / 2
     }
     
     func configureStackView() {
@@ -90,5 +92,18 @@ class CollectionViewCell: UICollectionViewCell {
         
         iconView.backgroundColor = .clear
         iconView.image = UIImage.init(named: "circle32")
+    }
+    
+    func selectCollectionAction() {
+        print("> mood selected")
+        self.borderAlpha = 1
+        imageView.layer.borderColor = UIColor.init(red: 1, green: 1, blue: 1, alpha: borderAlpha).cgColor
+        imageView.layer.borderWidth = 4
+    }
+    
+    func deselectCollectionAction() {
+        self.borderAlpha = 0
+        imageView.layer.borderColor = UIColor.init(red: 1, green: 1, blue: 1, alpha: borderAlpha).cgColor
+        imageView.layer.borderWidth = 4
     }
 }
