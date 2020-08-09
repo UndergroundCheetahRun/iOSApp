@@ -18,6 +18,8 @@ class CreatePostViewController: UIViewController {
 
         configureView()
 //        configureTabBar()
+        navigationController?.navigationBar.isHidden = false
+        navigationItem.title = "Create"
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -71,6 +73,7 @@ class CreatePostViewController: UIViewController {
     // ACTION :
     
     @objc func cancelAction(sender: UIButton) {
+        self.navigationController?.popToRootViewController(animated: true)
         dismiss(animated: true, completion: nil)
     }
     
