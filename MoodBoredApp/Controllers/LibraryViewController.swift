@@ -9,7 +9,7 @@
 import UIKit
 
 class LibraryViewController : UIViewController {
-
+    
     // PROPERTIES :
 
     let dataArray = ["AAA", "BBB", "CCC", "DDD", "EEE", "FFF", "GGG", "HHH", "III", "JJJ"]
@@ -40,7 +40,6 @@ class LibraryViewController : UIViewController {
         configureCollectionView()
         setupGridView()
         
-        let view = LibraryViewController()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -154,4 +153,6 @@ extension LibraryViewController: UICollectionViewDelegateFlowLayout {
         
         return width
     }
+    
 }
+

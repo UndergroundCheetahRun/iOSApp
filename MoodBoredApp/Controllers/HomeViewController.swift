@@ -90,7 +90,7 @@ class HomeViewController : UIViewController {
     // NAVIGATION BAR :
     
     func configureNavigationBar() {
-        navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationBar.isHidden = true
         navigationItem.title = "Home"
     }
     
@@ -272,9 +272,9 @@ class HomeViewController : UIViewController {
     
     func confirmAction() {
         let view = CreatePostViewController()
-        //self.navigationController?.pushViewController(view, animated: false)
+        self.navigationController?.pushViewController(view, animated: false)
         view.modalPresentationStyle = .fullScreen
-        showDetailViewController(view, sender: self)
+//        showDetailViewController(view, sender: self)
     }
     
 }

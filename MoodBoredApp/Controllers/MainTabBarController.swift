@@ -10,6 +10,8 @@ import UIKit
 
 class MainTabBarController: UITabBarController {
 
+    public static let mainTabBarController = MainTabBarController()
+    
     private let HomeVc = HomeViewController()
     private let FeedVc = LibraryViewController()
 
@@ -29,6 +31,7 @@ class MainTabBarController: UITabBarController {
             createController(title: viewTitles.library, imageName: circle, vc: FeedVc),
                             ]
     }
+    
 }
 
 

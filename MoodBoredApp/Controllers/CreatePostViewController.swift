@@ -9,7 +9,7 @@
 import UIKit
 
 class CreatePostViewController: UIViewController {
-
+    
     var cancelButton    = UIButton()
     var saveButton      = UIButton()
     
@@ -73,13 +73,24 @@ class CreatePostViewController: UIViewController {
     // ACTION :
     
     @objc func cancelAction(sender: UIButton) {
-        self.navigationController?.popToRootViewController(animated: true)
+        //self.navigationController?.popToRootViewController(animated: true)
         dismiss(animated: true, completion: nil)
     }
     
     @objc func saveAction(sender: UIButton) {
+        print ("> save pressed")
         let view = LibraryViewController()
         self.navigationController?.pushViewController(view, animated: true)
-        dismiss(animated: true, completion: nil)
+        
+        let mainTabController = MainTabBarController()
+        mainTabController.selectedIndex = 1
+    
+        let parent = self.parent
+//        if (parent?.isKind(of: MainTabBarController))! {
+//            parent.select
+        
+//        }
     }
 }
+
+
