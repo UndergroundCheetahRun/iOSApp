@@ -55,9 +55,16 @@ class HomeViewController : UIViewController {
         configureView()
     }
     
+    // VIEW WILL APPEAR :
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = false
+    }
+    
+    // VIEW WILL DISAPPEAR :
+    override func viewWillDisappear(_ animated: Bool) {
+        tabBarController?.tabBar.isHidden = false
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -84,6 +91,7 @@ class HomeViewController : UIViewController {
     
     func configureNavigationBar() {
         navigationController?.navigationBar.isHidden = true
+        navigationItem.title = "Home"
     }
     
     // BACKGROUND IMAGE :
@@ -264,10 +272,9 @@ class HomeViewController : UIViewController {
     
     func confirmAction() {
         let view = CreatePostViewController()
-        navigationController?.popViewController(animated: true)
-        view.modalPresentationStyle = .overFullScreen
-        self.present(view, animated: true, completion: nil)
-        //self.navigationController?.pushViewController(view, animated: true)
+        self.navigationController?.pushViewController(view, animated: false)
+        view.modalPresentationStyle = .fullScreen
+//        showDetailViewController(view, sender: self)
     }
     
 }
@@ -337,6 +344,7 @@ extension HomeViewController : UICollectionViewDelegate {
             if let cell = collectionView.cellForItem(at: indexPath) as? MoodViewCell {
                 cell.showBorderAction()
                 showBackgroundImageAction()
+                confirmAction()
             }
         }
     }

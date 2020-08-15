@@ -9,7 +9,7 @@
 import UIKit
 
 class LibraryViewController : UIViewController {
-
+    
     // PROPERTIES :
 
     let dataArray = ["AAA", "BBB", "CCC", "DDD", "EEE", "FFF", "GGG", "HHH", "III", "JJJ"]
@@ -39,10 +39,11 @@ class LibraryViewController : UIViewController {
         configureNavigationBar()
         configureCollectionView()
         setupGridView()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.isHidden = true
+        navigationController?.navigationBar.isHidden = false
         self.tabBarController?.tabBar.isHidden = false
     }
     
@@ -57,6 +58,7 @@ class LibraryViewController : UIViewController {
     // NAVIGATION BAR :
     func configureNavigationBar() {
         self.navigationItem.title = viewTitles.library
+        navigationController?.navigationBar.isHidden = false
     }
     
     // VIEW : configure View
@@ -151,4 +153,6 @@ extension LibraryViewController: UICollectionViewDelegateFlowLayout {
         
         return width
     }
+    
 }
+
