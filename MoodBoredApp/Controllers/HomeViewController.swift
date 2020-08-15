@@ -53,6 +53,7 @@ class HomeViewController : UIViewController {
         super.viewDidLoad()
         
         configureView()
+        print(tabBarController?.selectedIndex ?? "nil")
     }
     
     // VIEW WILL APPEAR :
@@ -272,9 +273,11 @@ class HomeViewController : UIViewController {
     
     func confirmAction() {
         let view = CreatePostViewController()
-        self.navigationController?.pushViewController(view, animated: false)
+        
         view.modalPresentationStyle = .fullScreen
-//        showDetailViewController(view, sender: self)
+        
+        self.navigationController?.present(view, animated: true, completion: nil)
+        //self.present(view, animated: true, completion: nil)
     }
     
 }

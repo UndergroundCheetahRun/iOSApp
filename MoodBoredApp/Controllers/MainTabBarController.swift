@@ -26,10 +26,11 @@ class MainTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewControllers =   [
+        
+        viewControllers = [
             createController(title: viewTitles.home, imageName: circle, vc: HomeVc),
             createController(title: viewTitles.library, imageName: circle, vc: FeedVc),
-                            ]
+        ]
     }
     
 }
