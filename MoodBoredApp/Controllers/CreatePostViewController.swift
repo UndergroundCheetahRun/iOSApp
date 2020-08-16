@@ -23,11 +23,11 @@ class CreatePostViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        configureTabBar()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        configureTabBar()
+
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -77,20 +77,21 @@ class CreatePostViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    @objc func saveAction(sender: UIButton) {
-        print ("> save pressed")
-        let view = LibraryViewController()
-        self.navigationController?.pushViewController(view, animated: true)
-        
-        let mainTabController = MainTabBarController()
-        mainTabController.selectedIndex = 1
     
-        let parent = self.parent
-//        if (parent?.isKind(of: MainTabBarController))! {
-//            parent.select
+    
+    @objc func saveAction(sender: UIButton) {
         
-//        }
+        print ("> save pressed")
+        
+        print(presentingViewController ?? "returned nil")
+        
+        if let tabBar = presentingViewController as? UITabBarController {
+            tabBar.selectedIndex = 1
+        }
+
+        dismiss(animated: true)
     }
+    
 }
 
 

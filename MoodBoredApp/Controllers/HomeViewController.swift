@@ -53,6 +53,7 @@ class HomeViewController : UIViewController {
         super.viewDidLoad()
         
         configureView()
+        print(tabBarController?.selectedIndex ?? "nil")
     }
     
     // VIEW WILL APPEAR :
@@ -272,11 +273,16 @@ class HomeViewController : UIViewController {
     
     func confirmAction() {
         let view = CreatePostViewController()
-        self.navigationController?.pushViewController(view, animated: false)
+        
+        showBackgroundImageAction()
         view.modalPresentationStyle = .fullScreen
-//        showDetailViewController(view, sender: self)
+        
+        self.navigationController?.present(view, animated: true, completion: nil)
     }
     
+    func deselectMoodAction() {
+        
+    }
 }
 
 // COLLECTION VIEWS : datasource, flow layout
@@ -315,10 +321,17 @@ extension HomeViewController : UICollectionViewDelegate {
     // COLLECTION VIEW : cell highlighted
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
         if collectionView == self.collectionListView {
-            
+            if let cell = collectionView.cellForItem(at: indexPath) as? CollectionViewCell {
+                cell.selectCollectionAction()
+            }
         } else if collectionView == self.moodListView {
-            if let cell = collectionView.cellForItem(at: indexPath) {
-                
+            if let cell = collectionView.cellForItem(at: indexPath) as? MoodViewCell {
+                cell.showBorderAction()
+                cell.moodIsSelected = true
+                showBackgroundImageAction()
+                if cell.isHighlighted == true {
+                    confirmAction()
+                }
             }
         }
     }
@@ -328,25 +341,29 @@ extension HomeViewController : UICollectionViewDelegate {
         if collectionView == self.collectionListView {
             
         } else if collectionView == self.moodListView {
-            if let cell = collectionView.cellForItem(at: indexPath) {
-                
+            if let cell = collectionView.cellForItem(at: indexPath) as? MoodViewCell {
+                if cell.isHighlighted == true {
+                    cell.moodIsSelected = false
+                } else {
+                    cell.moodIsSelected = false
+                }
             }
         }
     }
 
     // COLLECTION VIEW : cell selected
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == self.collectionListView {
-            if let cell = collectionView.cellForItem(at: indexPath) as? CollectionViewCell {
-                cell.selectCollectionAction()
-            }
-        } else if collectionView == self.moodListView {
-            if let cell = collectionView.cellForItem(at: indexPath) as? MoodViewCell {
-                cell.showBorderAction()
-                showBackgroundImageAction()
-                confirmAction()
-            }
-        }
+//        if collectionView == self.collectionListView {
+//            if let cell = collectionView.cellForItem(at: indexPath) as? CollectionViewCell {
+//                cell.selectCollectionAction()
+//            }
+//        } else if collectionView == self.moodListView {
+//            if let cell = collectionView.cellForItem(at: indexPath) as? MoodViewCell {
+//                cell.showBorderAction()
+//                showBackgroundImageAction()
+//                confirmAction()
+//            }
+//        }
     }
     
     // COLLECTION VIEW : cell deselected
@@ -358,7 +375,6 @@ extension HomeViewController : UICollectionViewDelegate {
         } else if collectionView == self.moodListView {
             if let cell = collectionView.cellForItem(at: indexPath) as? MoodViewCell {
                 cell.hideBorderAction()
-                hideBackgroundImageAction()
             }
         }
     }
