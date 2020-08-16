@@ -10,5 +10,9 @@ import CoreData
 
 struct CoreDataManager {
     
+    // PROPERTIES
+    static let sharedInstance = CoreDataManager()
+    
+    
 }
 

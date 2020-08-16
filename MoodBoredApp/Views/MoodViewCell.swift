@@ -18,7 +18,7 @@ class MoodViewCell: UICollectionViewCell {
     var tapToConfirmLabel   = UILabel()
     
     var borderAlpha : CGFloat = 0
-    
+    var moodIsSelected : Bool = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)

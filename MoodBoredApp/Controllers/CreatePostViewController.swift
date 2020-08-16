@@ -88,7 +88,7 @@ class CreatePostViewController: UIViewController {
         if let tabBar = presentingViewController as? UITabBarController {
             tabBar.selectedIndex = 1
         }
-        
+
         dismiss(animated: true)
     }
     
