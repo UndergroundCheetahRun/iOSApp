@@ -10,16 +10,18 @@ import UIKit
 
 class CreatePostViewController: UIViewController {
     
+    var currentDate     = Date()
+    var dateLabel       = UILabel()
+    var textField       = UITextField()
     var cancelButton    = UIButton()
-    var saveButton      = UIButton()
+    var savePostButton  = UIButton()
+    var stickersButton  = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configureView()
-//        configureTabBar()
-        navigationController?.navigationBar.isHidden = false
-        navigationItem.title = "Create"
+        configureNavBar()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -34,14 +36,28 @@ class CreatePostViewController: UIViewController {
         return true
     }
     
-    func configureTabBar() {
-        self.tabBarController?.tabBar.isHidden = true
+    func configureNavBar() {
+        navigationController?.navigationBar.isHidden = false
+        navigationItem.title = "Create"
     }
 
     func configureView() {
         view.backgroundColor = .gray
         configureBackButton()
+        configureStickerButton()
+        configureDateLabel()
         configureSaveButton()
+    }
+    
+    func configureDateLabel() {
+        view.addSubview(dateLabel)
+        
+        dateLabel.translatesAutoresizingMaskIntoConstraints = false
+        dateLabel.topAnchor.constraint(equalTo: cancelButton.bottomAnchor, constant: 4).isActive = true
+        dateLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        dateLabel.backgroundColor = .yellow
+        dateLabel.text = "Date Label goes here"
     }
     
     func configureBackButton() {
@@ -57,17 +73,30 @@ class CreatePostViewController: UIViewController {
         cancelButton.addTarget(self, action: #selector(cancelAction), for: UIControl.Event.touchUpInside)
     }
     
+    func configureStickerButton() {
+        view.addSubview(stickersButton)
+        
+        stickersButton.translatesAutoresizingMaskIntoConstraints = false
+        stickersButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16).isActive = true
+        stickersButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
+        stickersButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        stickersButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        
+        stickersButton.backgroundColor = .magenta
+        stickersButton.addTarget(self, action: #selector(cancelAction), for: UIControl.Event.touchUpInside)
+    }
+    
     func configureSaveButton() {
-        view.addSubview(saveButton)
+        view.addSubview(savePostButton)
         
-        saveButton.translatesAutoresizingMaskIntoConstraints = false
-        saveButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16).isActive = true
-        saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
-        saveButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        saveButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        savePostButton.translatesAutoresizingMaskIntoConstraints = false
+        savePostButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16).isActive = true
+        savePostButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
+        savePostButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        savePostButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
         
-        saveButton.backgroundColor = .green
-        saveButton.addTarget(self, action: #selector(saveAction), for: UIControl.Event.touchUpInside)
+        savePostButton.backgroundColor = .green
+        savePostButton.addTarget(self, action: #selector(saveAction), for: UIControl.Event.touchUpInside)
     }
     
     // ACTION :
