@@ -17,16 +17,22 @@ class MenuBar : UIView {
     
     weak var delegate : MenuBarDelegate?
     
+    let indicator = UIView()
+    
+    var indicatorLeading : NSLayoutConstraint?
+    var indicatorTrailing : NSLayoutConstraint?
+    
     let gridButton : UIButton!
     let playlistsButton : UIButton!
     var buttons : [UIButton]!
     
     let leadPadding : CGFloat = 16
-    let buttonSpace : CGFloat = 36
+    let buttonSpacing : CGFloat = 36
+    let indicatorCornerRadius : CGFloat = 16
     
     override init(frame: CGRect) {
-        gridButton = makeButton(withText: "Grid")
-        playlistsButton = makeButton(withText: "Playlist")
+        gridButton = makeButton(withText: "  Grid  ")
+        playlistsButton = makeButton(withText: "  Playlist  ")
         
         buttons = [gridButton, playlistsButton]
         
@@ -35,8 +41,8 @@ class MenuBar : UIView {
         gridButton.addTarget(self, action: #selector(gridButtonTapped), for: .primaryActionTriggered)
         playlistsButton.addTarget(self, action: #selector(playlistsButtonTapped), for: .primaryActionTriggered)
         
+        styleIndicator()
         setAlpha(for: gridButton)
-        
         layout()
     }
     
@@ -44,17 +50,141 @@ class MenuBar : UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private func styleIndicator() {
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.backgroundColor = .systemGreen
+        indicator.layer.cornerRadius = indicatorCornerRadius
+    }
+    
     private func layout() {
+        addSubview(indicator)
         addSubview(gridButton)
         addSubview(playlistsButton)
         
+        backgroundColor = .magenta
+        
         NSLayoutConstraint.activate([
-            // Buttons
-            gridButton.topAnchor.constraint(equalTo: topAnchor),
+            // buttons
+            //gridButton.topAnchor.constraint(equalTo: topAnchor),
+            gridButton.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             gridButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: leadPadding),
-            playlistsButton.topAnchor.constraint(equalTo: topAnchor),
-            playlistsButton.leadingAnchor.constraint(equalTo: gridButton.trailingAnchor, constant: buttonSpace),
+//            playlistsButton.topAnchor.constraint(equalTo: topAnchor),
+            playlistsButton.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            playlistsButton.leadingAnchor.constraint(equalTo: gridButton.trailingAnchor, constant: buttonSpacing),
+            
+            // bar
+//            indicator.bottomAnchor.constraint(equalTo: bottomAnchor),
+            indicator.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            indicator.heightAnchor.constraint(equalToConstant: 32)
         ])
+        
+        indicatorLeading = indicator.leadingAnchor.constraint(equalTo: gridButton.leadingAnchor)
+        indicatorTrailing = indicator.trailingAnchor.constraint(equalTo: gridButton.trailingAnchor)
+        
+        indicatorLeading?.isActive = true
+        indicatorTrailing?.isActive = true
+    }
+    
+    func scrollIndicator(to contentOffset: CGPoint) {
+        let index = Int(contentOffset.x / frame.width)
+        let atScrollStart = Int(contentOffset.x) % Int(frame.width) == 0
+        
+        if atScrollStart {
+            return
+        }
+        
+        // determine percent scrolled relative to index
+        let percentScrolled: CGFloat
+        switch index {
+        case 0:
+             percentScrolled = contentOffset.x / frame.width - 0
+        case 1:
+            percentScrolled = contentOffset.x / frame.width - 1
+        case 2:
+            percentScrolled = contentOffset.x / frame.width - 2
+        default:
+            percentScrolled = contentOffset.x / frame.width
+        }
+        
+        // determine buttons
+        var fromButton  : UIButton
+        var toButton    : UIButton
+        
+        switch index {
+        case 2:
+            fromButton  = buttons[index]
+            toButton    = buttons[index - 1]
+        default:
+            fromButton  = buttons[index]
+            toButton    = buttons[index + 1]
+        }
+        
+        // animate alpha of buttons
+        switch index {
+        case 2:
+            break
+        default:
+            fromButton.alpha = fmax(0.5, (1 - percentScrolled))
+            toButton.alpha = fmax(0.5, percentScrolled)
+        }
+        
+        let fromWidth = fromButton.frame.width
+        let toWidth = toButton.frame.width
+        
+        // determine width
+        let sectionWidth: CGFloat
+        switch index {
+        case 0:
+            sectionWidth = leadPadding + fromWidth + buttonSpacing
+        default:
+            sectionWidth = fromWidth + buttonSpacing
+        }
+
+        // normalize x scroll
+        let sectionFraction = sectionWidth / frame.width
+        let x = contentOffset.x * sectionFraction
+        
+        let buttonWidthDiff = fromWidth - toWidth
+        let widthOffset = buttonWidthDiff * percentScrolled
+
+        // determine leading y
+        let y : CGFloat
+        switch index {
+        case 0 :
+            if x < leadPadding {
+                y = x
+            } else {
+                y = x - leadPadding * percentScrolled
+            }
+        case 1 :
+            y = x + 13
+        case 2 :
+            y = x
+        default:
+            y = x
+        }
+        
+        // Note: 13 is button width difference between Playlists and Artists button
+        // from previous index. Hard coded for now.
+        
+        indicatorLeading?.constant = y
+
+        // determine trailing y
+        let yTrailing: CGFloat
+        switch index {
+        case 0:
+            yTrailing = y - widthOffset
+        case 1:
+            yTrailing = y - widthOffset - leadPadding
+        case 2:
+            yTrailing = y - widthOffset - leadPadding / 2
+        default:
+            yTrailing = y - widthOffset - leadPadding
+        }
+        
+        indicatorTrailing?.constant = yTrailing
+        
+        print("\(index) percentScrolled = \(percentScrolled)")
     }
 }
 

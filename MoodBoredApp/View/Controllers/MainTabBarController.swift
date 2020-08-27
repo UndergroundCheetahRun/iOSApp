@@ -17,7 +17,7 @@ class MainTabBarController: UITabBarController {
 
     struct viewTitles {
         static let home     = "Home"
-        static let library  = "Library"
+        static let library  = "Feed"
     }
     
     let circle  = "circle32"
