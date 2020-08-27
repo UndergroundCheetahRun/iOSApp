@@ -13,7 +13,7 @@ class MainTabBarController: UITabBarController {
     public static let mainTabBarController = MainTabBarController()
     
     private let HomeVc = HomeViewController()
-    private let FeedVc = LibraryViewController()
+    private let FeedVc = FeedViewController()
 
     struct viewTitles {
         static let home     = "Home"

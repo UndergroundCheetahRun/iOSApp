@@ -12,8 +12,8 @@ class HomeViewController : UIViewController {
     
     // DATA :
     
-    var collectionDataArray = ["Collection", "Collection"]
-    var moodDataArray = ["Mood", "Mood", "Mood", "Mood", "Mood", "Mood", "Mood"]
+    var collectionDataArray = ["Flakey Feelings", "Paddy Paper", "Coming Soon"]
+    var moodDataArray = ["Mad\nRed", "Chill\nOrange", "Happy\nYellow", "Disgusted\nGreen", "Sad\nBlue", "Scared\nPurple", "Loved\nPink", "Empty\nGray"]
     
     // PROPERTIES :
     
@@ -54,7 +54,6 @@ class HomeViewController : UIViewController {
         super.viewDidLoad()
         
         configureView()
-        print(tabBarController?.selectedIndex ?? "nil")
     }
     
     // VIEW WILL APPEAR :
@@ -201,7 +200,7 @@ class HomeViewController : UIViewController {
         replyLabel.heightAnchor.constraint(lessThanOrEqualToConstant: 70).isActive = true
         replyLabel.widthAnchor.constraint(lessThanOrEqualToConstant: view.frame.width * 0.85).isActive = true
         
-        replyLabel.backgroundColor      = .lightGray
+        replyLabel.backgroundColor      = .gray
         replyLabel.text                 = "It happens sometimes.           \nWanna talk about it ?"
         replyLabel.clipsToBounds        = true
         replyLabel.textAlignment        = .center
@@ -254,6 +253,7 @@ class HomeViewController : UIViewController {
         collectionListView.heightAnchor.constraint(equalToConstant: view.frame.height * 0.05 ).isActive = true
 
         collectionListView.backgroundColor = .clear
+        collectionListView.showsHorizontalScrollIndicator = false
     }
     
     func configureMoodsViews() {
@@ -270,6 +270,7 @@ class HomeViewController : UIViewController {
         moodListView.heightAnchor.constraint(equalToConstant: view.frame.height * 0.45 ).isActive = true
         
         moodListView.backgroundColor = .clear
+        moodListView.showsHorizontalScrollIndicator = false
     }
     
     func setCollectionListViewDelegates() {
@@ -301,6 +302,8 @@ class HomeViewController : UIViewController {
         
         print(self.moodListView.indexPathsForSelectedItems?.first as Any)
         let indexPath = self.moodListView.indexPathsForSelectedItems?.first
+        
+        
 //        if let indexPath = self.moodListView.indexPathsForSelectedItems {
 //        let selectedCells = self.moodListView.cellForItem(at: indexPath)
 //
@@ -337,7 +340,7 @@ extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == self.collectionListView {
             
-            return 10
+            return collectionDataArray.count
             
         } else if collectionView == self.moodListView {
             
@@ -352,9 +355,12 @@ extension HomeViewController: UICollectionViewDataSource {
         
         if collectionView == self.collectionListView {
             let collectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! CollectionViewCell
+            collectionViewCell.textLabel.text = "  |  \(collectionDataArray[indexPath.row])"
             return collectionViewCell
+            
         } else if collectionView == self.moodListView {
             let moodViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MoodCellId", for: indexPath) as! MoodViewCell
+            moodViewCell.textLabel.text = moodDataArray[indexPath.row]
             return moodViewCell
         }
         fatalError()
@@ -424,7 +430,7 @@ extension HomeViewController : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == self.collectionListView {
             
-            return CGSize(width: self.collectionListView.frame.height * 4/1, height: self.collectionListView.frame.height)
+            return CGSize(width: self.collectionListView.frame.height * 5.5, height: self.collectionListView.frame.height)
             
         } else if collectionView == self.moodListView {
             
@@ -433,3 +439,4 @@ extension HomeViewController : UICollectionViewDelegateFlowLayout {
         fatalError()
     }
 }
+

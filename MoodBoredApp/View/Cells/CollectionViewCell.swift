@@ -45,7 +45,7 @@ class CollectionViewCell: UICollectionViewCell {
         imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
         imageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).isActive = true
         
-        imageView.backgroundColor = .systemBlue
+        imageView.backgroundColor = .gray
         imageView.layer.cornerRadius = self.frame.height / 2
     }
     
@@ -72,7 +72,7 @@ class CollectionViewCell: UICollectionViewCell {
     
     func configureCollectionLabel() {
         let barChar = " | "
-        let collectionName = "Collection Label"
+        let collectionName = "Flakey Feelings"
         
         let attributeStringFull = NSMutableAttributedString()
         let attributeStringOne = NSAttributedString.init(string: barChar, attributes: [NSAttributedString.Key.baselineOffset: 1])
@@ -83,6 +83,8 @@ class CollectionViewCell: UICollectionViewCell {
         
         textLabel.attributedText = attributeStringFull
         textLabel.numberOfLines = 1
+        textLabel.textColor = .white
+        textLabel.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.medium)
     }
     
     func configureCollectionIcon() {
@@ -91,7 +93,8 @@ class CollectionViewCell: UICollectionViewCell {
         iconView.widthAnchor.constraint(equalToConstant: 20).isActive = true
         
         iconView.backgroundColor = .clear
-        iconView.image = UIImage.init(named: "circle32")
+        iconView.image = UIImage.init(named: "circle32")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+        iconView.tintColor = .white
     }
     
     func selectCollectionAction() {
