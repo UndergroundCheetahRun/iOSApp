@@ -42,7 +42,7 @@ class PostViewCell: UICollectionViewCell {
         cellBackground.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
         cellBackground.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).isActive = true
         
-        cellBackground.backgroundColor = .magenta
+        cellBackground.backgroundColor = .gray
         cellBackground.layer.cornerRadius = self.frame.height * 1/30
     }
     
@@ -60,6 +60,7 @@ class PostViewCell: UICollectionViewCell {
         
         dateLabel.text = "5m ago"
         dateLabel.numberOfLines = 1
+        dateLabel.textColor = .white
     }
     
     func configurePostText() {
@@ -85,6 +86,7 @@ class PostViewCell: UICollectionViewCell {
         iconView.widthAnchor.constraint(equalToConstant: 20).isActive = true
         
         iconView.backgroundColor = .clear
-        iconView.image = UIImage.init(named: "circle32")
+        iconView.image = UIImage.init(named: "circle32")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+        iconView.tintColor = .white
     }
 }

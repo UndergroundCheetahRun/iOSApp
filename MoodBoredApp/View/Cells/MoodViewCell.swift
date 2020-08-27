@@ -47,7 +47,7 @@ class MoodViewCell: UICollectionViewCell {
         button.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
         button.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).isActive = true
         
-        button.backgroundColor = .magenta
+        button.backgroundColor = .gray
         button.layer.cornerRadius = self.frame.height * 1/30
     }
     
@@ -60,7 +60,7 @@ class MoodViewCell: UICollectionViewCell {
         imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
         imageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).isActive = true
         
-        imageView.backgroundColor = .magenta
+        imageView.backgroundColor = .gray
         imageView.layer.cornerRadius = self.frame.height * 1/30
     }
     
@@ -73,6 +73,9 @@ class MoodViewCell: UICollectionViewCell {
         
         textLabel.text = "Mood\nLabel"
         textLabel.numberOfLines = 2
+        textLabel.textColor = .white
+        textLabel.textAlignment = .center
+        textLabel.font = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.medium)
     }
     
     func configureCollectionIcon() {
@@ -85,7 +88,8 @@ class MoodViewCell: UICollectionViewCell {
         iconView.widthAnchor.constraint(equalToConstant: 20).isActive = true
         
         iconView.backgroundColor = .clear
-        iconView.image = UIImage.init(named: "circle32")
+        iconView.image = UIImage.init(named: "circle32")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+        iconView.tintColor = .white
     }
     
     func configureTapToConfirmLabel() {
@@ -97,13 +101,14 @@ class MoodViewCell: UICollectionViewCell {
         //tapToConfirmLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).isActive = true
         
         tapToConfirmLabel.backgroundColor = .clear
-        tapToConfirmLabel.text = "TAP TO CONFIRM"
+        tapToConfirmLabel.text = "DOUBLE TAP\nTO CONFIRM"
+        tapToConfirmLabel.numberOfLines = 2
         tapToConfirmLabel.alpha = 0
     }
     
     // ACTIONS
     
-    func showBorderAction() {
+    @objc func showBorderAction() {
         print("> mood selected")
         self.borderAlpha = 1
         imageView.layer.borderColor = UIColor.init(red: 1, green: 1, blue: 1, alpha: borderAlpha).cgColor
@@ -111,7 +116,7 @@ class MoodViewCell: UICollectionViewCell {
         tapToConfirmLabel.alpha = borderAlpha
     }
     
-    func hideBorderAction() {
+    @objc func hideBorderAction() {
         self.borderAlpha = 0
         imageView.layer.borderColor = UIColor.init(red: 1, green: 1, blue: 1, alpha: borderAlpha).cgColor
         imageView.layer.borderWidth = 4

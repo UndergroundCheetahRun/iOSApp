@@ -12,19 +12,23 @@ class HomeViewController : UIViewController {
     
     // DATA :
     
-    var collectionDataArray = ["Collection", "Collection"]
-    var moodDataArray = ["Mood", "Mood", "Mood", "Mood", "Mood", "Mood", "Mood"]
+    var collectionDataArray = ["Flakey Feelings", "Paddy Paper", "Coming Soon"]
+    var moodDataArray = ["Mad\nRed", "Chill\nOrange", "Happy\nYellow", "Disgusted\nGreen", "Sad\nBlue", "Scared\nPurple", "Loved\nPink", "Empty\nGray"]
     
     // PROPERTIES :
-    
-    var adBannerView    = UIView()
-    var replyLabel      = UIButton()
-    var collectionLabel = UILabel()
-    var moodLabel       = UILabel()
     
     let backgroundImage = UIButton()
     let backgroundImageButton = UIButton()
     var backgroundImageIsHidden = false
+    
+    let containerView       = UIView()
+    let replyContainerView  = UIView()
+    var adBannerView        = UIView()
+    var replyLabel          = ReplyLabel()
+    var collectionLabel     = UILabel()
+    var moodLabel           = UILabel()
+    
+    let tableView           = UITableView()
     
     let collectionListView : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -44,16 +48,12 @@ class HomeViewController : UIViewController {
         return cv
     }()
     
-    let tableView = UITableView()
-    let containerView = UIView()
-    
     // VIEW DID LOAD:
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureView()
-        print(tabBarController?.selectedIndex ?? "nil")
     }
     
     // VIEW WILL APPEAR :
@@ -81,11 +81,12 @@ class HomeViewController : UIViewController {
         configureContainerView()
         configureBackgroundImageButton()
         configureAddBannerView()
-        configureReplyLabel()
         configureMoodsViews()
         configureMoodsLabel()
         configureCollectionsViews()
         configureCollectionsLabel()
+        configureReplyContainerView()
+        configureReplyLabel()
     }
     
     // NAVIGATION BAR :
@@ -111,7 +112,7 @@ class HomeViewController : UIViewController {
         hideBackgroundImageAction()
     }
     
-    // SCROLL VIEW :
+    // SCROLL VIEW : using a tableview
     
     func configureTableView() {
         view.addSubview(tableView)
@@ -129,6 +130,7 @@ class HomeViewController : UIViewController {
     }
     
     // CONTAINER VIEW :
+    
     func configureContainerView() {
         tableView.addSubview(containerView)
         
@@ -167,23 +169,45 @@ class HomeViewController : UIViewController {
         adBannerView.backgroundColor = .red
     }
     
+    // REPLIES CONTAINER VIEW :
+    
+    func configureReplyContainerView() {
+        
+        containerView.addSubview(replyContainerView)
+        
+        replyContainerView.translatesAutoresizingMaskIntoConstraints = false
+        replyContainerView.topAnchor.constraint(equalTo: adBannerView.bottomAnchor, constant: 0).isActive = true
+        replyContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
+        replyContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
+        replyContainerView.bottomAnchor.constraint(equalTo: collectionLabel.topAnchor, constant: 0).isActive = true
+        
+        replyContainerView.backgroundColor = .clear
+        
+        var tapGesture : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideBackgroundImageAction))
+        tapGesture.numberOfTapsRequired = 1
+        replyContainerView.addGestureRecognizer(tapGesture)
+    }
+    
     // REPLIES :
     
     func configureReplyLabel() {
-        containerView.addSubview(replyLabel)
+        replyContainerView.addSubview(replyLabel)
         
         replyLabel.translatesAutoresizingMaskIntoConstraints = false
-        replyLabel.topAnchor.constraint(equalTo: adBannerView.topAnchor, constant: 80).isActive = true
-        replyLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
-        replyLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
-        replyLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        replyLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        replyLabel.centerYAnchor.constraint(equalTo: replyContainerView.centerYAnchor).isActive = true
+        replyLabel.centerXAnchor.constraint(equalTo: replyContainerView.centerXAnchor).isActive = true
+        replyLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 55).isActive = true
+        replyLabel.heightAnchor.constraint(lessThanOrEqualToConstant: 70).isActive = true
+        replyLabel.widthAnchor.constraint(lessThanOrEqualToConstant: view.frame.width * 0.85).isActive = true
         
-        replyLabel.backgroundColor = .magenta
-        replyLabel.setTitle("TEST BUTTON LENGTH TEST BUTTON TEST BUTTON ", for: .normal)
-        replyLabel.layer.cornerRadius = 16
-        replyLabel.titleLabel?.font = UIFont.systemFont(ofSize: 21, weight: UIFont.Weight.medium)
-        replyLabel.titleLabel?.numberOfLines = 4
+        replyLabel.backgroundColor      = .gray
+        replyLabel.text                 = "It happens sometimes.           \nWanna talk about it ?"
+        replyLabel.clipsToBounds        = true
+        replyLabel.textAlignment        = .center
+        replyLabel.layer.cornerRadius   = 20
+        replyLabel.numberOfLines        = 2
+        replyLabel.textColor            = .white
+        replyLabel.font                 = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.medium)
     }
     
     // LABELS :
@@ -197,7 +221,7 @@ class HomeViewController : UIViewController {
         collectionLabel.bottomAnchor.constraint(equalTo: collectionListView.topAnchor, constant: -10).isActive = true
         collectionLabel.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -10).isActive = true
 
-        collectionLabel.backgroundColor = .magenta
+        collectionLabel.backgroundColor = .clear
         collectionLabel.text = "Collections"
     }
     
@@ -209,7 +233,7 @@ class HomeViewController : UIViewController {
         moodLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
         moodLabel.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -10).isActive = true
         
-        moodLabel.backgroundColor = .magenta
+        moodLabel.backgroundColor = .clear
         moodLabel.text = "Moods"
     }
     
@@ -224,11 +248,12 @@ class HomeViewController : UIViewController {
         
         collectionListView.translatesAutoresizingMaskIntoConstraints = false
         collectionListView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
-        collectionListView.bottomAnchor.constraint(equalTo: moodLabel.topAnchor, constant: -10).isActive = true
+        collectionListView.bottomAnchor.constraint(equalTo: moodLabel.topAnchor, constant: -20).isActive = true
         collectionListView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
-        collectionListView.heightAnchor.constraint(equalToConstant: 45 ).isActive = true
+        collectionListView.heightAnchor.constraint(equalToConstant: view.frame.height * 0.05 ).isActive = true
 
         collectionListView.backgroundColor = .clear
+        collectionListView.showsHorizontalScrollIndicator = false
     }
     
     func configureMoodsViews() {
@@ -241,10 +266,11 @@ class HomeViewController : UIViewController {
         moodListView.translatesAutoresizingMaskIntoConstraints = false
         moodListView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
         moodListView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
-        moodListView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -20).isActive = true
-        moodListView.heightAnchor.constraint(equalToConstant: 300 ).isActive = true
+        moodListView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -32).isActive = true
+        moodListView.heightAnchor.constraint(equalToConstant: view.frame.height * 0.45 ).isActive = true
         
         moodListView.backgroundColor = .clear
+        moodListView.showsHorizontalScrollIndicator = false
     }
     
     func setCollectionListViewDelegates() {
@@ -260,6 +286,10 @@ class HomeViewController : UIViewController {
     }
     
     // ACTIONS:
+
+    func didDoubleTapCollectionView(gesture: UITapGestureRecognizer) {
+
+    }
     
     func showBackgroundImageAction() {
         backgroundImage.alpha = 1
@@ -269,14 +299,32 @@ class HomeViewController : UIViewController {
     @objc func hideBackgroundImageAction() {
         backgroundImage.alpha = 0
         backgroundImageIsHidden = true
+        
+        print(self.moodListView.indexPathsForSelectedItems?.first as Any)
+        let indexPath = self.moodListView.indexPathsForSelectedItems?.first
+        
+        
+//        if let indexPath = self.moodListView.indexPathsForSelectedItems {
+//        let selectedCells = self.moodListView.cellForItem(at: indexPath)
+//
+//        if let collectionView = moodListView {
+//
+//        }
+//            let indexPath = collectionView.indexPathsForSelectedItems?.first,
+//            let cell = collectionView.cellForItem(at: indexPath) as? TestCell,
+//            let data = cell.data {
+//                    print(data)
+//        }
     }
     
-    func confirmAction() {
+    func selectAction() {
+        showBackgroundImageAction()
+    }
+    
+    @objc func confirmAction(_ gesture: UITapGestureRecognizer) {
         let view = CreatePostViewController()
         
-        showBackgroundImageAction()
         view.modalPresentationStyle = .fullScreen
-        
         self.navigationController?.present(view, animated: true, completion: nil)
     }
     
@@ -292,7 +340,7 @@ extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == self.collectionListView {
             
-            return 10
+            return collectionDataArray.count
             
         } else if collectionView == self.moodListView {
             
@@ -307,9 +355,12 @@ extension HomeViewController: UICollectionViewDataSource {
         
         if collectionView == self.collectionListView {
             let collectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! CollectionViewCell
+            collectionViewCell.textLabel.text = "  |  \(collectionDataArray[indexPath.row])"
             return collectionViewCell
+            
         } else if collectionView == self.moodListView {
             let moodViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MoodCellId", for: indexPath) as! MoodViewCell
+            moodViewCell.textLabel.text = moodDataArray[indexPath.row]
             return moodViewCell
         }
         fatalError()
@@ -326,11 +377,8 @@ extension HomeViewController : UICollectionViewDelegate {
             }
         } else if collectionView == self.moodListView {
             if let cell = collectionView.cellForItem(at: indexPath) as? MoodViewCell {
-                cell.showBorderAction()
-                cell.moodIsSelected = true
-                showBackgroundImageAction()
                 if cell.isHighlighted == true {
-                    confirmAction()
+                    selectAction()
                 }
             }
         }
@@ -342,6 +390,7 @@ extension HomeViewController : UICollectionViewDelegate {
             
         } else if collectionView == self.moodListView {
             if let cell = collectionView.cellForItem(at: indexPath) as? MoodViewCell {
+                cell.hideBorderAction()
                 if cell.isHighlighted == true {
                     cell.moodIsSelected = false
                 } else {
@@ -353,17 +402,13 @@ extension HomeViewController : UICollectionViewDelegate {
 
     // COLLECTION VIEW : cell selected
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        if collectionView == self.collectionListView {
-//            if let cell = collectionView.cellForItem(at: indexPath) as? CollectionViewCell {
-//                cell.selectCollectionAction()
-//            }
-//        } else if collectionView == self.moodListView {
-//            if let cell = collectionView.cellForItem(at: indexPath) as? MoodViewCell {
-//                cell.showBorderAction()
-//                showBackgroundImageAction()
-//                confirmAction()
-//            }
-//        }
+        if collectionView == self.collectionListView {
+
+        } else if collectionView == self.moodListView {
+            if let cell = collectionView.cellForItem(at: indexPath) as? MoodViewCell {
+                cell.showBorderAction()
+            }
+        }
     }
     
     // COLLECTION VIEW : cell deselected
@@ -385,12 +430,13 @@ extension HomeViewController : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == self.collectionListView {
             
-            return CGSize(width: self.collectionListView.frame.height * 4/1, height: self.collectionListView.frame.height)
+            return CGSize(width: self.collectionListView.frame.height * 5.5, height: self.collectionListView.frame.height)
             
         } else if collectionView == self.moodListView {
             
-            return CGSize(width: 300 * 9/16, height: 300)
+            return CGSize(width: collectionView.frame.height * 9/16, height: collectionView.frame.height)
         }
         fatalError()
     }
 }
+

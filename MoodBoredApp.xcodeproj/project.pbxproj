@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		18409CEF24DB2983009FB568 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18409CEE24DB2983009FB568 /* LaunchScreenViewController.swift */; };
+		1842143024F0601900BF2D20 /* ReplyLabel_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1842142F24F0601900BF2D20 /* ReplyLabel_Extension.swift */; };
+		1842143424F723A300BF2D20 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1842143324F723A300BF2D20 /* MenuBar.swift */; };
+		18521BED24F7ECED00C63216 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18521BEC24F7ECED00C63216 /* FeedCell.swift */; };
 		189B441124DDA78700B7FBD3 /* CreatePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189B441024DDA78700B7FBD3 /* CreatePostViewController.swift */; };
 		189B441324DDA8E100B7FBD3 /* PostViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189B441224DDA8E100B7FBD3 /* PostViewCell.swift */; };
 		189B441524DE0FD400B7FBD3 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189B441424DE0FD400B7FBD3 /* PostDetailViewController.swift */; };
@@ -22,6 +25,7 @@
 		18A0A26C24E7EAA40052FFC2 /* Playlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A0A26B24E7EAA40052FFC2 /* Playlist.swift */; };
 		18D3920E24D715DF004EDB56 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D3920D24D715DF004EDB56 /* CollectionViewCell.swift */; };
 		18D4358324D9E4370041FF73 /* MoodViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D4358224D9E4370041FF73 /* MoodViewCell.swift */; };
+		18D437A124EC96FB00C89079 /* MoodBoredApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 18D4379F24EC96FB00C89079 /* MoodBoredApp.xcdatamodeld */; };
 		18E0BC1024D70B2F00970EF7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E0BC0F24D70B2F00970EF7 /* AppDelegate.swift */; };
 		18E0BC1224D70B2F00970EF7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E0BC1124D70B2F00970EF7 /* SceneDelegate.swift */; };
 		18E0BC1424D70B2F00970EF7 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E0BC1324D70B2F00970EF7 /* HomeViewController.swift */; };
@@ -29,7 +33,7 @@
 		18E0BC1C24D70B3300970EF7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18E0BC1A24D70B3300970EF7 /* LaunchScreen.storyboard */; };
 		18E0BC2724D70B3300970EF7 /* MoodBoredAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E0BC2624D70B3300970EF7 /* MoodBoredAppTests.swift */; };
 		18E0BC3224D70B3300970EF7 /* MoodBoredAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E0BC3124D70B3300970EF7 /* MoodBoredAppUITests.swift */; };
-		18E0BC4124D70BEB00970EF7 /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E0BC4024D70BEB00970EF7 /* LibraryViewController.swift */; };
+		18E0BC4124D70BEB00970EF7 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E0BC4024D70BEB00970EF7 /* FeedViewController.swift */; };
 		18E0BC4324D70C7400970EF7 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E0BC4224D70C7400970EF7 /* MainTabBarController.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +56,9 @@
 
 /* Begin PBXFileReference section */
 		18409CEE24DB2983009FB568 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
+		1842142F24F0601900BF2D20 /* ReplyLabel_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyLabel_Extension.swift; sourceTree = "<group>"; };
+		1842143324F723A300BF2D20 /* MenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
+		18521BEC24F7ECED00C63216 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		189B441024DDA78700B7FBD3 /* CreatePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewController.swift; sourceTree = "<group>"; };
 		189B441224DDA8E100B7FBD3 /* PostViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewCell.swift; sourceTree = "<group>"; };
 		189B441424DE0FD400B7FBD3 /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
@@ -66,6 +73,7 @@
 		18A0A26B24E7EAA40052FFC2 /* Playlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playlist.swift; sourceTree = "<group>"; };
 		18D3920D24D715DF004EDB56 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		18D4358224D9E4370041FF73 /* MoodViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodViewCell.swift; sourceTree = "<group>"; };
+		18D437A024EC96FB00C89079 /* MoodBoredApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MoodBoredApp.xcdatamodel; sourceTree = "<group>"; };
 		18E0BC0C24D70B2F00970EF7 /* MoodBoredApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoodBoredApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18E0BC0F24D70B2F00970EF7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		18E0BC1124D70B2F00970EF7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,7 +87,7 @@
 		18E0BC2D24D70B3300970EF7 /* MoodBoredAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoodBoredAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		18E0BC3124D70B3300970EF7 /* MoodBoredAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodBoredAppUITests.swift; sourceTree = "<group>"; };
 		18E0BC3324D70B3300970EF7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		18E0BC4024D70BEB00970EF7 /* LibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
+		18E0BC4024D70BEB00970EF7 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		18E0BC4224D70C7400970EF7 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -108,6 +116,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1842142E24F05FEA00BF2D20 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				1842142F24F0601900BF2D20 /* ReplyLabel_Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		1842143124F7234E00BF2D20 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				18D3920C24D715C7004EDB56 /* Storyboards */,
+				1842143224F7238700BF2D20 /* Views */,
+				18E0BC3F24D70BBD00970EF7 /* Cells */,
+				18D3920F24D715FF004EDB56 /* Controllers */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1842143224F7238700BF2D20 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1842143324F723A300BF2D20 /* MenuBar.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		184D5B6124E14F0900EDFACC /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -130,7 +165,7 @@
 				18E0BC4224D70C7400970EF7 /* MainTabBarController.swift */,
 				18E0BC1324D70B2F00970EF7 /* HomeViewController.swift */,
 				189B441024DDA78700B7FBD3 /* CreatePostViewController.swift */,
-				18E0BC4024D70BEB00970EF7 /* LibraryViewController.swift */,
+				18E0BC4024D70BEB00970EF7 /* FeedViewController.swift */,
 				189B441424DE0FD400B7FBD3 /* PostDetailViewController.swift */,
 			);
 			path = Controllers;
@@ -161,16 +196,16 @@
 			children = (
 				18E0BC0F24D70B2F00970EF7 /* AppDelegate.swift */,
 				18E0BC1124D70B2F00970EF7 /* SceneDelegate.swift */,
-				18E0BC4624D70CC000970EF7 /* Models */,
-				18D3920C24D715C7004EDB56 /* Storyboards */,
-				18E0BC3F24D70BBD00970EF7 /* Views */,
-				18D3920F24D715FF004EDB56 /* Controllers */,
+				18E0BC4624D70CC000970EF7 /* Model */,
+				1842143124F7234E00BF2D20 /* View */,
 				18E0BC4524D70CAC00970EF7 /* ViewModels */,
 				18E0BC4424D70CA000970EF7 /* Database */,
 				18E0BC4724D70CD800970EF7 /* Collections */,
 				184D5B6124E14F0900EDFACC /* Utils */,
+				1842142E24F05FEA00BF2D20 /* Extension */,
 				18E0BC1824D70B3300970EF7 /* Assets.xcassets */,
 				18E0BC1D24D70B3300970EF7 /* Info.plist */,
+				18D4379F24EC96FB00C89079 /* MoodBoredApp.xcdatamodeld */,
 			);
 			path = MoodBoredApp;
 			sourceTree = "<group>";
@@ -193,14 +228,15 @@
 			path = MoodBoredAppUITests;
 			sourceTree = "<group>";
 		};
-		18E0BC3F24D70BBD00970EF7 /* Views */ = {
+		18E0BC3F24D70BBD00970EF7 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
 				18D3920D24D715DF004EDB56 /* CollectionViewCell.swift */,
 				18D4358224D9E4370041FF73 /* MoodViewCell.swift */,
 				189B441224DDA8E100B7FBD3 /* PostViewCell.swift */,
+				18521BEC24F7ECED00C63216 /* FeedCell.swift */,
 			);
-			path = Views;
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		18E0BC4424D70CA000970EF7 /* Database */ = {
@@ -222,7 +258,7 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		18E0BC4624D70CC000970EF7 /* Models */ = {
+		18E0BC4624D70CC000970EF7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				18A0A25C24E7EA0C0052FFC2 /* Mood.swift */,
@@ -230,7 +266,7 @@
 				18A0A26024E7EA260052FFC2 /* Post.swift */,
 				18A0A26B24E7EAA40052FFC2 /* Playlist.swift */,
 			);
-			path = Models;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		18E0BC4724D70CD800970EF7 /* Collections */ = {
@@ -377,18 +413,22 @@
 				18E0BC1024D70B2F00970EF7 /* AppDelegate.swift in Sources */,
 				18A0A25F24E7EA150052FFC2 /* Collection.swift in Sources */,
 				18A0A26824E7EA8D0052FFC2 /* CollectionViewModel.swift in Sources */,
+				18521BED24F7ECED00C63216 /* FeedCell.swift in Sources */,
 				18A0A26624E7EA780052FFC2 /* PostViewModel.swift in Sources */,
 				18A0A25D24E7EA0C0052FFC2 /* Mood.swift in Sources */,
 				189B441324DDA8E100B7FBD3 /* PostViewCell.swift in Sources */,
 				18A0A25B24E7E8B10052FFC2 /* CoreDataManager.swift in Sources */,
 				18A0A26424E7EA710052FFC2 /* MoodViewModel.swift in Sources */,
 				18A0A26124E7EA260052FFC2 /* Post.swift in Sources */,
+				18D437A124EC96FB00C89079 /* MoodBoredApp.xcdatamodeld in Sources */,
 				18D3920E24D715DF004EDB56 /* CollectionViewCell.swift in Sources */,
 				18E0BC4324D70C7400970EF7 /* MainTabBarController.swift in Sources */,
 				18A0A26A24E7EA990052FFC2 /* PlaylistViewModel.swift in Sources */,
-				18E0BC4124D70BEB00970EF7 /* LibraryViewController.swift in Sources */,
+				1842143424F723A300BF2D20 /* MenuBar.swift in Sources */,
+				18E0BC4124D70BEB00970EF7 /* FeedViewController.swift in Sources */,
 				189B441124DDA78700B7FBD3 /* CreatePostViewController.swift in Sources */,
 				18E0BC1224D70B2F00970EF7 /* SceneDelegate.swift in Sources */,
+				1842143024F0601900BF2D20 /* ReplyLabel_Extension.swift in Sources */,
 				18A0A26C24E7EAA40052FFC2 /* Playlist.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -710,6 +750,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		18D4379F24EC96FB00C89079 /* MoodBoredApp.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				18D437A024EC96FB00C89079 /* MoodBoredApp.xcdatamodel */,
+			);
+			currentVersion = 18D437A024EC96FB00C89079 /* MoodBoredApp.xcdatamodel */;
+			path = MoodBoredApp.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 18E0BC0424D70B2F00970EF7 /* Project object */;
 }
