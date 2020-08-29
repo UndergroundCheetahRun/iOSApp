@@ -68,7 +68,7 @@ class FeedViewController : UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.isHidden = true
+        navigationController?.navigationBar.isHidden = false
         self.tabBarController?.tabBar.isHidden = false
     }
     
@@ -84,7 +84,9 @@ class FeedViewController : UIViewController {
     
     func configureNavigationBar() {
         self.navigationItem.title = viewTitles.library
-        navigationController?.navigationBar.isHidden = true
+        
+        navigationController?.navigationBar.isHidden = false
+        navigationController?.hidesBarsOnSwipe = true
     }
     
     // MENU BAR :
@@ -100,13 +102,14 @@ class FeedViewController : UIViewController {
             menuBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             menuBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             menuBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            menuBar.heightAnchor.constraint(equalToConstant: 42),
+            menuBar.heightAnchor.constraint(equalToConstant: 36),
             
             // collectionview
-            mainCollectionView.topAnchor.constraint(equalToSystemSpacingBelow: menuBar.bottomAnchor, multiplier: 2),
+            mainCollectionView.topAnchor.constraint(equalTo: menuBar.bottomAnchor, constant: 0),
             mainCollectionView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 0),
+            mainCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
             view.trailingAnchor.constraint(equalToSystemSpacingAfter: mainCollectionView.trailingAnchor, multiplier: 0),
-            view.safeAreaLayoutGuide.bottomAnchor.constraint(equalToSystemSpacingBelow: mainCollectionView.bottomAnchor, multiplier: 0)
+//            view.safeAreaLayoutGuide.bottomAnchor.constraint(equalToSystemSpacingBelow: mainCollectionView.bottomAnchor, multiplier: 0)
         ])
         
         menuBar.delegate = self
@@ -212,7 +215,7 @@ extension FeedViewController: UICollectionViewDelegateFlowLayout {
         
         if collectionView == self.mainCollectionView {
 
-            return CGSize(width: view.frame.width, height: collectionView.frame.height)
+            return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
             
         } else if collectionView == self.postListView {
             let width = self.calculateWidth()

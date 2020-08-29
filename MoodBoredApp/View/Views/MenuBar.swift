@@ -24,6 +24,7 @@ class MenuBar : UIView {
     
     let gridButton : UIButton!
     let playlistsButton : UIButton!
+    let testButton : UIButton!
     var buttons : [UIButton]!
     
     let leadPadding : CGFloat = 16
@@ -33,13 +34,15 @@ class MenuBar : UIView {
     override init(frame: CGRect) {
         gridButton = makeButton(withText: "  Grid  ")
         playlistsButton = makeButton(withText: "  Playlist  ")
+        testButton = makeButton(withText: "  Test  ")
         
-        buttons = [gridButton, playlistsButton]
+        buttons = [gridButton, playlistsButton, testButton]
         
         super.init(frame: .zero)
         
         gridButton.addTarget(self, action: #selector(gridButtonTapped), for: .primaryActionTriggered)
         playlistsButton.addTarget(self, action: #selector(playlistsButtonTapped), for: .primaryActionTriggered)
+        testButton.addTarget(self, action: #selector(playlistsButtonTapped), for: UIControl.Event.primaryActionTriggered)
         
         styleIndicator()
         setAlpha(for: gridButton)
@@ -52,7 +55,7 @@ class MenuBar : UIView {
     
     private func styleIndicator() {
         indicator.translatesAutoresizingMaskIntoConstraints = false
-        indicator.backgroundColor = .systemYellow
+        indicator.backgroundColor = .systemOrange
         indicator.alpha = 0.7
         indicator.layer.cornerRadius = indicatorCornerRadius
     }
@@ -61,8 +64,9 @@ class MenuBar : UIView {
         addSubview(indicator)
         addSubview(gridButton)
         addSubview(playlistsButton)
+        addSubview(testButton)
         
-        backgroundColor = UIColor(white: 0, alpha: 0)
+        backgroundColor = .systemYellow
         
         NSLayoutConstraint.activate([
             // buttons
@@ -70,6 +74,8 @@ class MenuBar : UIView {
             gridButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: leadPadding),
             playlistsButton.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             playlistsButton.leadingAnchor.constraint(equalTo: gridButton.trailingAnchor, constant: buttonSpacing),
+            testButton.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            testButton.leadingAnchor.constraint(equalTo: playlistsButton.trailingAnchor, constant: buttonSpacing),
             
             // bar
             indicator.centerYAnchor.constraint(equalTo: self.centerYAnchor),
@@ -109,12 +115,9 @@ class MenuBar : UIView {
         var toButton: UIButton
         
         switch index {
-        case 1:
-            fromButton = buttons[index]
-            toButton = buttons[index - 1]
         case 2:
             fromButton = buttons[index]
-            toButton = buttons[index - 2]
+            toButton = buttons[index - 1]
         default:
             fromButton = buttons[index]
             toButton = buttons[index + 1]
@@ -216,8 +219,10 @@ extension MenuBar {
             button = gridButton
         case 1 :
             button = playlistsButton
+        case 2 :
+            button = testButton
         default :
-            button = playlistsButton
+            button = gridButton
         }
         
         setAlpha(for: button)
@@ -230,7 +235,9 @@ extension MenuBar {
     private func setAlpha(for button: UIButton) {
         gridButton.alpha = 0.8
         playlistsButton.alpha = 0.8
+        testButton.alpha = 0.8
         
+        button.setTitleColor(UIColor(white: 0, alpha: 1.0), for: UIControl.State.normal)
         button.alpha = 1.0
     }
 }
@@ -241,6 +248,6 @@ func makeButton(withText text: String) -> UIButton {
     button.setTitle(text, for: UIControl.State.normal)
     button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.bold)
     button.titleLabel?.adjustsFontSizeToFitWidth = true
-    button.setTitleColor(UIColor(white: 0.6, alpha: 1), for: UIControl.State.normal)
+    button.setTitleColor(UIColor(white: 0, alpha: 0.8), for: UIControl.State.normal)
     return button
 }
