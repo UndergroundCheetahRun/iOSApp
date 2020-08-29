@@ -52,7 +52,8 @@ class MenuBar : UIView {
     
     private func styleIndicator() {
         indicator.translatesAutoresizingMaskIntoConstraints = false
-        indicator.backgroundColor = .systemGreen
+        indicator.backgroundColor = .systemYellow
+        indicator.alpha = 0.7
         indicator.layer.cornerRadius = indicatorCornerRadius
     }
     
@@ -61,19 +62,16 @@ class MenuBar : UIView {
         addSubview(gridButton)
         addSubview(playlistsButton)
         
-        backgroundColor = .magenta
+        backgroundColor = UIColor(white: 0, alpha: 0)
         
         NSLayoutConstraint.activate([
             // buttons
-            //gridButton.topAnchor.constraint(equalTo: topAnchor),
             gridButton.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             gridButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: leadPadding),
-//            playlistsButton.topAnchor.constraint(equalTo: topAnchor),
             playlistsButton.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             playlistsButton.leadingAnchor.constraint(equalTo: gridButton.trailingAnchor, constant: buttonSpacing),
             
             // bar
-//            indicator.bottomAnchor.constraint(equalTo: bottomAnchor),
             indicator.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             indicator.heightAnchor.constraint(equalToConstant: 32)
         ])
@@ -107,16 +105,19 @@ class MenuBar : UIView {
         }
         
         // determine buttons
-        var fromButton  : UIButton
-        var toButton    : UIButton
+        var fromButton: UIButton
+        var toButton: UIButton
         
         switch index {
+        case 1:
+            fromButton = buttons[index]
+            toButton = buttons[index - 1]
         case 2:
-            fromButton  = buttons[index]
-            toButton    = buttons[index - 1]
+            fromButton = buttons[index]
+            toButton = buttons[index - 2]
         default:
-            fromButton  = buttons[index]
-            toButton    = buttons[index + 1]
+            fromButton = buttons[index]
+            toButton = buttons[index + 1]
         }
         
         // animate alpha of buttons
@@ -148,17 +149,17 @@ class MenuBar : UIView {
         let widthOffset = buttonWidthDiff * percentScrolled
 
         // determine leading y
-        let y : CGFloat
+        let y:CGFloat
         switch index {
-        case 0 :
+        case 0:
             if x < leadPadding {
                 y = x
             } else {
                 y = x - leadPadding * percentScrolled
             }
-        case 1 :
+        case 1:
             y = x + 13
-        case 2 :
+        case 2:
             y = x
         default:
             y = x
@@ -169,7 +170,7 @@ class MenuBar : UIView {
         
         indicatorLeading?.constant = y
 
-        // determine trailing y
+        // determine trailing yti
         let yTrailing: CGFloat
         switch index {
         case 0:
@@ -216,7 +217,7 @@ extension MenuBar {
         case 1 :
             button = playlistsButton
         default :
-            button = gridButton
+            button = playlistsButton
         }
         
         setAlpha(for: button)
@@ -227,8 +228,8 @@ extension MenuBar {
     }
     
     private func setAlpha(for button: UIButton) {
-        gridButton.alpha = 0.5
-        playlistsButton.alpha = 0.5
+        gridButton.alpha = 0.8
+        playlistsButton.alpha = 0.8
         
         button.alpha = 1.0
     }
@@ -238,8 +239,8 @@ func makeButton(withText text: String) -> UIButton {
     let button = UIButton()
     button.translatesAutoresizingMaskIntoConstraints = false
     button.setTitle(text, for: UIControl.State.normal)
-    button.titleLabel?.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.headline)
+    button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.bold)
     button.titleLabel?.adjustsFontSizeToFitWidth = true
-    //button.setTitleColor(.black, for: UIControl.State.normal)
+    button.setTitleColor(UIColor(white: 0.6, alpha: 1), for: UIControl.State.normal)
     return button
 }

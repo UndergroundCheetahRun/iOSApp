@@ -223,6 +223,8 @@ class HomeViewController : UIViewController {
 
         collectionLabel.backgroundColor = .clear
         collectionLabel.text = "Collections"
+        collectionLabel.font = UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.bold)
+        collectionLabel.alpha = 0.45
     }
     
     func configureMoodsLabel() {
@@ -235,6 +237,8 @@ class HomeViewController : UIViewController {
         
         moodLabel.backgroundColor = .clear
         moodLabel.text = "Moods"
+        moodLabel.font = UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.bold)
+        moodLabel.alpha = 0.45
     }
     
     // COLLECTION VIEWS :
