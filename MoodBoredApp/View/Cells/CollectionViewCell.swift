@@ -45,7 +45,7 @@ class CollectionViewCell: UICollectionViewCell {
         imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
         imageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).isActive = true
         
-        imageView.backgroundColor = .gray
+        imageView.backgroundColor = UIColor(white: 0.4, alpha: 0.5)
         imageView.layer.cornerRadius = self.frame.height / 2
     }
     
@@ -63,7 +63,7 @@ class CollectionViewCell: UICollectionViewCell {
         
         stackView.axis = .horizontal
         stackView.distribution = .fillProportionally
-        stackView.spacing = 2
+        stackView.spacing = 8
         stackView.alignment = .center
         
         configureCollectionLabel()
@@ -71,15 +71,12 @@ class CollectionViewCell: UICollectionViewCell {
     }
     
     func configureCollectionLabel() {
-        let barChar = " | "
-        let collectionName = "Flakey Feelings"
+        let collectionName = ""
         
         let attributeStringFull = NSMutableAttributedString()
-        let attributeStringOne = NSAttributedString.init(string: barChar, attributes: [NSAttributedString.Key.baselineOffset: 1])
-        let attributeStringTwo = NSAttributedString.init(string: collectionName, attributes: [NSAttributedString.Key.baselineOffset: 0])
+        let attributeStringOne = NSAttributedString.init(string: collectionName, attributes: [NSAttributedString.Key.baselineOffset: 0])
         
         attributeStringFull.append(attributeStringOne)
-        attributeStringFull.append(attributeStringTwo)
         
         textLabel.attributedText = attributeStringFull
         textLabel.numberOfLines = 1
@@ -100,8 +97,8 @@ class CollectionViewCell: UICollectionViewCell {
     func selectCollectionAction() {
         print("> mood selected")
         self.borderAlpha = 1
-        imageView.layer.borderColor = UIColor.init(red: 1, green: 1, blue: 1, alpha: borderAlpha).cgColor
-        imageView.layer.borderWidth = 4
+        imageView.layer.borderColor = UIColor.init(red: 1, green: 0.984, blue: 0, alpha: borderAlpha).cgColor
+        imageView.layer.borderWidth = 2.5
     }
     
     func deselectCollectionAction() {

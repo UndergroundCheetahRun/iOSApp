@@ -94,6 +94,9 @@ class HomeViewController : UIViewController {
     func configureNavigationBar() {
         navigationController?.navigationBar.isHidden = true
         navigationItem.title = "Home"
+        navigationController?.navigationBar.isTranslucent = false
+        
+        tabBarController?.tabBar.isTranslucent = false
     }
     
     // BACKGROUND IMAGE :
@@ -200,7 +203,7 @@ class HomeViewController : UIViewController {
         replyLabel.heightAnchor.constraint(lessThanOrEqualToConstant: 70).isActive = true
         replyLabel.widthAnchor.constraint(lessThanOrEqualToConstant: view.frame.width * 0.85).isActive = true
         
-        replyLabel.backgroundColor      = .gray
+        replyLabel.backgroundColor      = UIColor(white: 0.4, alpha: 0.5)
         replyLabel.text                 = "It happens sometimes.           \nWanna talk about it ?"
         replyLabel.clipsToBounds        = true
         replyLabel.textAlignment        = .center
@@ -258,6 +261,7 @@ class HomeViewController : UIViewController {
 
         collectionListView.backgroundColor = .clear
         collectionListView.showsHorizontalScrollIndicator = false
+        collectionListView.allowsMultipleSelection = false
     }
     
     func configureMoodsViews() {
@@ -275,6 +279,7 @@ class HomeViewController : UIViewController {
         
         moodListView.backgroundColor = .clear
         moodListView.showsHorizontalScrollIndicator = false
+        moodListView.allowsMultipleSelection = false
     }
     
     func setCollectionListViewDelegates() {
@@ -359,7 +364,7 @@ extension HomeViewController: UICollectionViewDataSource {
         
         if collectionView == self.collectionListView {
             let collectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! CollectionViewCell
-            collectionViewCell.textLabel.text = "  |  \(collectionDataArray[indexPath.row])"
+            collectionViewCell.textLabel.text = "\(collectionDataArray[indexPath.row])"
             return collectionViewCell
             
         } else if collectionView == self.moodListView {

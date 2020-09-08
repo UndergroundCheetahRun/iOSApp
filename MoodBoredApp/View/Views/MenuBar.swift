@@ -27,7 +27,7 @@ class MenuBar : UIView {
     let testButton : UIButton!
     var buttons : [UIButton]!
     
-    let leadPadding : CGFloat = 16
+    var leadPadding : CGFloat = 16
     let buttonSpacing : CGFloat = 36
     let indicatorCornerRadius : CGFloat = 16
     
@@ -55,18 +55,23 @@ class MenuBar : UIView {
     
     private func styleIndicator() {
         indicator.translatesAutoresizingMaskIntoConstraints = false
-        indicator.backgroundColor = .systemOrange
+        indicator.backgroundColor = .systemBlue
         indicator.alpha = 0.7
         indicator.layer.cornerRadius = indicatorCornerRadius
     }
     
     private func layout() {
+        
+        let screenSize = UIScreen.main.bounds
+        let screenWidth = screenSize.width
+        leadPadding = ( screenWidth * 0.5 ) - 80
+        
         addSubview(indicator)
         addSubview(gridButton)
         addSubview(playlistsButton)
         addSubview(testButton)
         
-        backgroundColor = .systemYellow
+        backgroundColor = .clear
         
         NSLayoutConstraint.activate([
             // buttons
@@ -104,8 +109,8 @@ class MenuBar : UIView {
              percentScrolled = contentOffset.x / frame.width - 0
         case 1:
             percentScrolled = contentOffset.x / frame.width - 1
-        case 2:
-            percentScrolled = contentOffset.x / frame.width - 2
+//        case 2:
+//            percentScrolled = contentOffset.x / frame.width - 2
         default:
             percentScrolled = contentOffset.x / frame.width
         }
@@ -115,7 +120,7 @@ class MenuBar : UIView {
         var toButton: UIButton
         
         switch index {
-        case 2:
+        case 1: //case 2:
             fromButton = buttons[index]
             toButton = buttons[index - 1]
         default:
@@ -125,11 +130,11 @@ class MenuBar : UIView {
         
         // animate alpha of buttons
         switch index {
-        case 2:
+        case 1: //case 2:
             break
         default:
-            fromButton.alpha = fmax(0.5, (1 - percentScrolled))
-            toButton.alpha = fmax(0.5, percentScrolled)
+            fromButton.alpha = fmax(0.7, (1 - percentScrolled))
+            toButton.alpha = fmax(0.7, percentScrolled)
         }
         
         let fromWidth = fromButton.frame.width
@@ -180,8 +185,8 @@ class MenuBar : UIView {
             yTrailing = y - widthOffset
         case 1:
             yTrailing = y - widthOffset - leadPadding
-        case 2:
-            yTrailing = y - widthOffset - leadPadding / 2
+//        case 2:
+//            yTrailing = y - widthOffset - leadPadding / 2
         default:
             yTrailing = y - widthOffset - leadPadding
         }
@@ -219,8 +224,8 @@ extension MenuBar {
             button = gridButton
         case 1 :
             button = playlistsButton
-        case 2 :
-            button = testButton
+//        case 2 :
+//            button = testButton
         default :
             button = gridButton
         }
@@ -233,11 +238,12 @@ extension MenuBar {
     }
     
     private func setAlpha(for button: UIButton) {
-        gridButton.alpha = 0.8
-        playlistsButton.alpha = 0.8
-        testButton.alpha = 0.8
+        gridButton.alpha = 0.5
         
-        button.setTitleColor(UIColor(white: 0, alpha: 1.0), for: UIControl.State.normal)
+        playlistsButton.alpha = 0.5
+        
+        testButton.alpha = 0.5
+        
         button.alpha = 1.0
     }
 }
@@ -248,6 +254,7 @@ func makeButton(withText text: String) -> UIButton {
     button.setTitle(text, for: UIControl.State.normal)
     button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.bold)
     button.titleLabel?.adjustsFontSizeToFitWidth = true
-    button.setTitleColor(UIColor(white: 0, alpha: 0.8), for: UIControl.State.normal)
+    button.setTitleColor(UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 1), for: UIControl.State.normal)
+    //button.setTitleColor(UIColor(white: 0.5, alpha: 1.0), for: UIControl.State.normal)
     return button
 }

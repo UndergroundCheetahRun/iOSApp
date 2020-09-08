@@ -60,7 +60,7 @@ class MoodViewCell: UICollectionViewCell {
         imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
         imageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).isActive = true
         
-        imageView.backgroundColor = .gray
+        imageView.backgroundColor = UIColor(white: 0.4, alpha: 0.5)
         imageView.layer.cornerRadius = self.frame.height * 1/30
     }
     
@@ -90,18 +90,21 @@ class MoodViewCell: UICollectionViewCell {
         iconView.backgroundColor = .clear
         iconView.image = UIImage.init(named: "circle32")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         iconView.tintColor = .white
+        
+        iconView.alpha = 0
     }
     
     func configureTapToConfirmLabel() {
         addSubview(tapToConfirmLabel)
         
         tapToConfirmLabel.translatesAutoresizingMaskIntoConstraints = false
-        tapToConfirmLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8).isActive = true
+        tapToConfirmLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16).isActive = true
         tapToConfirmLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         //tapToConfirmLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).isActive = true
         
         tapToConfirmLabel.backgroundColor = .clear
-        tapToConfirmLabel.text = "DOUBLE TAP\nTO CONFIRM"
+        tapToConfirmLabel.text = "TAP TO CONFIRM"
+        tapToConfirmLabel.font = UIFont.systemFont(ofSize: 14)
         tapToConfirmLabel.numberOfLines = 2
         tapToConfirmLabel.alpha = 0
     }
@@ -111,9 +114,12 @@ class MoodViewCell: UICollectionViewCell {
     @objc func showBorderAction() {
         print("> mood selected")
         self.borderAlpha = 1
-        imageView.layer.borderColor = UIColor.init(red: 1, green: 1, blue: 1, alpha: borderAlpha).cgColor
-        imageView.layer.borderWidth = 4
-        tapToConfirmLabel.alpha = borderAlpha
+        imageView.layer.borderColor = UIColor.init(red: 1, green: 0.984, blue: 0, alpha: borderAlpha).cgColor
+        imageView.layer.borderWidth = 2.5
+        
+        let labelColor : CGFloat = 1
+        tapToConfirmLabel.textColor = UIColor.init(white: labelColor, alpha: 1)
+        tapToConfirmLabel.alpha = 0.6
     }
     
     @objc func hideBorderAction() {

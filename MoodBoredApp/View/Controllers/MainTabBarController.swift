@@ -16,11 +16,17 @@ class MainTabBarController: UITabBarController {
     private let FeedVc = FeedViewController()
 
     struct viewTitles {
-        static let home     = "Home"
-        static let library  = "Feed"
+        static let home = "Home"
+        static let feed = "Feed"
     }
     
-    let circle  = "circle32"
+    struct imageNames {
+        static let circle  = "circle32"
+        static let home    = "ICON_DOCK_UNHIGHLIGHTED_House_x2"
+        static let feed    = "ICON_DOCK_UNHIGHLIGHTED_Feed_x2"
+        static let selectedHome    = "ICON_DOCK_HIGHLIGHTED_House_x2"
+        static let selectedFeed    = "ICON_DOCK_HIGHLIGHTED_Feed_x2"
+    }
     
     // VIEW DID LOAD :
     
@@ -28,8 +34,8 @@ class MainTabBarController: UITabBarController {
         super.viewDidLoad()
         
         viewControllers = [
-            createController(title: viewTitles.home, imageName: circle, vc: HomeVc),
-            createController(title: viewTitles.library, imageName: circle, vc: FeedVc),
+            createController(title: viewTitles.home, imageName: imageNames.home, selectedImage: imageNames.selectedHome, vc: HomeVc),
+            createController(title: viewTitles.feed, imageName: imageNames.feed, selectedImage: imageNames.selectedFeed, vc: FeedVc),
         ]
     }
     
@@ -38,10 +44,11 @@ class MainTabBarController: UITabBarController {
 
 extension MainTabBarController {
     
-    private func createController(title: String, imageName: String, vc: UIViewController) -> UINavigationController {
+    private func createController(title: String, imageName: String, selectedImage: String, vc: UIViewController) -> UINavigationController {
         let recentVc = UINavigationController(rootViewController: vc)
         recentVc.tabBarItem.title = title
         recentVc.tabBarItem.image = UIImage(named: imageName)
+        recentVc.tabBarItem.selectedImage = UIImage(named: selectedImage)
         return recentVc
     }
 }

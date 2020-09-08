@@ -31,6 +31,7 @@
       "size" : "40x40"
     },
     {
+      "filename" : "MoodBored_Logo_v2.1_appIcon@120px.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "60x60"
@@ -89,6 +90,18 @@
       "idiom" : "ios-marketing",
       "scale" : "1x",
       "size" : "1024x1024"
+    },
+    {
+      "filename" : "MoodBored_Logo_v2.1_appIcon.png.png",
+      "idiom" : "mac",
+      "scale" : "1x",
+      "size" : "512x512"
+    },
+    {
+      "filename" : "MoodBored_Logo_v2.1_appIcon.png@2x.png",
+      "idiom" : "mac",
+      "scale" : "2x",
+      "size" : "512x512"
     }
   ],
   "info" : {

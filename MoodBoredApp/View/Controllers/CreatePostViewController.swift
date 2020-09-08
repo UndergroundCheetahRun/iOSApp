@@ -39,6 +39,8 @@ class CreatePostViewController: UIViewController {
     func configureNavBar() {
         navigationController?.navigationBar.isHidden = false
         navigationItem.title = "Create"
+        
+        tabBarController?.tabBar.isTranslucent = false
     }
 
     func configureView() {
